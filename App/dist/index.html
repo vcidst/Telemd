@@ -1,0 +1,126 @@
+<html>
+	<head>
+		<title>TeleMD:DemoApp</title>
+
+		<!--	Meta	-->
+		<meta	content="content-type"	content="text/html;	charset=utf-8"/>
+		<meta	http-equiv="X-UA-Compatible"	content="IE=edge">
+		<meta	name="google"	value="notranslate">
+		<meta	name="robots"	content="index,	follow">
+		<meta	name="description"	content="Remote	diagnosis	for	India	in	COVID-19	health	crisis">
+		<meta	name="keywords"	content="">
+		<meta	name="author"	content="Mike	Cj">
+		<!--meta	name="google-site-verification"	/-->
+		<meta name="viewport"	id="viewport"	content="width=device-width,	initial-scale=1.0,	maximum-scale=1.0,	user-scalable=0">
+
+		<!--	manifest	-->
+		<link	rel="manifest"	href="/manifest.json">
+		<meta	name="theme-color"	content="#FF0000"	/>
+
+		<!--	stylesheet	Links	-->
+		<link	rel="stylesheet"	type="text/css"	href="css/main.css?v=1.0.0">
+		<link	rel="stylesheet"	type="text/css"	href="third_party/spinkit.css?v=1.0.0">
+		<link	rel="stylesheet"	type="text/css"	href="third_party/please-wait.css?v=1.0.0">
+		<link	href="https://fonts.googleapis.com/css?family=Nunito:400,600,700&display=swap&v=1.0.0"	rel="stylesheet">
+		<link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.4.0/firebase-ui-auth.css?v=1.0.0" />
+
+		<!--	scripts	-->
+		<script	type="text/javascript"	src="third_party/please-wait.min.js"></script>
+		<!--	The	core	Firebase	JS	SDK	-->
+		<script	src="https://www.gstatic.com/firebasejs/7.13.0/firebase-app.js"></script>
+		<script	src="https://www.gstatic.com/firebasejs/7.13.0/firebase-analytics.js"></script>
+		<!--	The	Jit si SDK	-->
+		<script src='https://meet.jit.si/external_api.js?v=1.0.0'></script>
+
+	</head>
+
+	<body>
+
+		<script	type="text/javascript">
+				let	please_wait_spinners	=	[
+						'<div	class="sk-rotating-plane"	style="background-color:	#FFF"></div>',
+						'<div	class="sk-double-bounce"><div	class="sk-child	sk-double-bounce1"	style="background-color:	#FFF"></div><div	class="sk-child	sk-double-bounce2"	style="background-color:	#FFF"></div></div>',
+						'<div	class="sk-wandering-cubes"><div	class="sk-cube	sk-cube1	sk-cube1"	style="background-color:	#FFF"></div><div	class="sk-cube	sk-cube1	sk-cube2"	style="background-color:	#FFF"></div></div>',
+						'<div	class="sk-spinner	sk-spinner-pulse"	style="background-color:	#FFF"></div>',
+						'<div	class="sk-chasing-dots"><div	class="sk-child	sk-dot1"	style="background-color:	#FFF"></div><div	class="sk-child	sk-dot2"	style="background-color:	#FFF"></div></div>',
+						'<div	class="sk-three-bounce"><div	class="sk-child	sk-bounce1"	style="background-color:	#FFF"></div><div	class="sk-child	sk-bounce2"	style="background-color:	#FFF"></div><div	class="sk-child	sk-bounce3"	style="background-color:	#FFF"></div></div>',
+						'<div	class="sk-cube-grid"><div	class="sk-cube	sk-cube1"	style="background-color:	#FFF"></div><div	class="sk-cube	sk-cube2"	style="background-color:	#FFF"></div><div	class="sk-cube	sk-cube3"	style="background-color:	#FFF"></div><div	class="sk-cube	sk-cube4"	style="background-color:	#FFF"></div><div	class="sk-cube	sk-cube5"	style="background-color:	#FFF"></div><div	class="sk-cube	sk-cube6"	style="background-color:	#FFF"></div><div	class="sk-cube	sk-cube7"	style="background-color:	#FFF"></div><div	class="sk-cube	sk-cube8"	style="background-color:	#FFF"></div><div	class="sk-cube	sk-cube9"	style="background-color:	#FFF"></div></div>',
+				];
+
+				let	loading_message_sub	=	'';
+				let	please_wait_spinner_index	=	Math.floor(Math.random()*please_wait_spinners.length);
+
+				window.loading_screen	=	window.pleaseWait({
+						logo:	'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==',
+						backgroundColor:	'#000',
+						loadingHtml:	please_wait_spinners[please_wait_spinner_index]	+	'<br><p	class="loading-message"	style="margin-top:	-60px;color:rgba(255,	255,	255,	0.7);	font-size:	12px;">'	+	loading_message_sub	+	'<br><span	id="_status">Connecting...</span></p>'
+				});
+		</script>
+
+		<div id="prelogin" style="color: white;">Loading...</div>
+		<script	type="text/javascript"	src="js/bundle.js"></script>
+
+		<!--	HEADER	-->
+		<header>
+			<div id="header_content">
+				<img src="images/logo.png" alt="" width="150" height="40">
+				<hr>
+			</div>
+			<button	id="ham_button"	style="display:	none;">&#9776;</button>
+
+
+	    <div id="sidenav" class="sidenav closed">
+	      <a href="javascript:void(0)" class="closebtn" id="close_nav">&times;</a>
+	      <div id="sidemenu">
+	        <a href="index.html" id="home_item"><span class="selected">Home</span></a>
+	        <a href="#" id="about_item"><span>About</span></a>
+	        <a href="#" id="settings_item"><span>Settings</span></a>
+	        <a href="#" id="contact_item"><span>Contact</span></a>
+	        <a href="index.html" id="logout_button"><span>Logout</span></a>
+	      </div>
+	    </div>
+		</header>
+
+		<!--	LOGIN	-->
+		<div	class="main-div	login-section"	id="login_div">
+				<div	id="firebaseui-auth-container"></div>
+		</div>
+
+		<!--	MAIN	-->
+		<div	id="main">
+				<div	id="user_div"	class="loggedin-div"	style="display:	none;">
+						<div	class="main_video_item"	id="meet">Meeting screen...</div>
+				</div>
+		</div>
+
+		<!--	ABOUT	-->
+		<div	id="about"	style="display:none;">
+				<p	style="letter-spacing:	0.1em;	margin-bottom:	0;">	ABOUT	</p>
+				<p	style="font-size:	14px;">TeleMD	v1.0.0</p>
+				<br>
+				<br>
+				<p>TeleMD	is	a	web	application	to	connect	remote	patients	to	Doctors.	</p>
+				<br>
+				<p>Team	TeleMD<p>
+		</div>
+
+		<!--	FOOTER	-->
+		<footer	id="_footer">
+		<p>Made	by	Timeblur®</p>
+		</footer>
+
+
+		<script>
+			if	('serviceWorker'	in	navigator)	{
+				console.log('Will	the	service	worker	register?');
+				navigator.serviceWorker.register('sw.js')
+						.then(function(reg){
+								console.log('Yes,	it	did.');
+						}).catch(function(err)	{
+								console.log('No	it	didnt.	This	happened:',	err)
+						});
+			}
+		</script>
+
+	</body>
+</html>

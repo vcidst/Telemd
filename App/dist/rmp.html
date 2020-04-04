@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>TeleMD:Doctor Registration</title>
+		<!--	Meta	-->
+		<meta	content="content-type"	content="text/html;	charset=utf-8"/>
+		<meta	http-equiv="X-UA-Compatible"	content="IE=edge">
+		<meta	name="google"	value="notranslate">
+		<meta	name="robots"	content="index,	follow">
+		<meta	name="description"	content="Remote	diagnosis	for	India	in	COVID-19	health	crisis">
+		<meta	name="keywords"	content="">
+		<meta	name="author"	content="Mike	Cj">
+		<!--meta	name="google-site-verification"	/-->
+		<meta name="viewport"	id="viewport"	content="width=device-width,	initial-scale=1.0,	maximum-scale=1.0,	user-scalable=0">
+
+
+		<!--	stylesheet	Links	-->
+		<link	rel="stylesheet"	type="text/css"	href="css/rmp.css?v=1.0.0">
+		<link	rel="stylesheet"	type="text/css"	href="third_party/spinkit.css?v=1.0.0">
+		<link	rel="stylesheet"	type="text/css"	href="third_party/please-wait.css?v=1.0.0">
+		<link rel="stylesheet" 	type="text/css" href="third_party/notyf.min.css?v=1.0.0">
+
+		<link	href="https://fonts.googleapis.com/css?family=Nunito:400,600,700&display=swap&v=1.0.0"	rel="stylesheet">
+		<link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.4.0/firebase-ui-auth.css?v=1.0.0" />
+
+
+		<!--	scripts	-->
+		<script	type="text/javascript"	src="third_party/please-wait.min.js"></script>
+		<!--	The	core	Firebase	JS	SDK	-->
+		<script	src="https://www.gstatic.com/firebasejs/7.13.0/firebase-app.js"></script>
+		<script	src="https://www.gstatic.com/firebasejs/7.13.0/firebase-analytics.js"></script>
+
+	</head>
+
+	<body>
+
+		<script	type="text/javascript">
+				let	please_wait_spinners	=	[
+						'<div	class="sk-rotating-plane"	style="background-color:	#FFF"></div>',
+						'<div	class="sk-double-bounce"><div	class="sk-child	sk-double-bounce1"	style="background-color:	#FFF"></div><div	class="sk-child	sk-double-bounce2"	style="background-color:	#FFF"></div></div>',
+						'<div	class="sk-wandering-cubes"><div	class="sk-cube	sk-cube1	sk-cube1"	style="background-color:	#FFF"></div><div	class="sk-cube	sk-cube1	sk-cube2"	style="background-color:	#FFF"></div></div>',
+						'<div	class="sk-spinner	sk-spinner-pulse"	style="background-color:	#FFF"></div>',
+						'<div	class="sk-chasing-dots"><div	class="sk-child	sk-dot1"	style="background-color:	#FFF"></div><div	class="sk-child	sk-dot2"	style="background-color:	#FFF"></div></div>',
+						'<div	class="sk-three-bounce"><div	class="sk-child	sk-bounce1"	style="background-color:	#FFF"></div><div	class="sk-child	sk-bounce2"	style="background-color:	#FFF"></div><div	class="sk-child	sk-bounce3"	style="background-color:	#FFF"></div></div>',
+						'<div	class="sk-cube-grid"><div	class="sk-cube	sk-cube1"	style="background-color:	#FFF"></div><div	class="sk-cube	sk-cube2"	style="background-color:	#FFF"></div><div	class="sk-cube	sk-cube3"	style="background-color:	#FFF"></div><div	class="sk-cube	sk-cube4"	style="background-color:	#FFF"></div><div	class="sk-cube	sk-cube5"	style="background-color:	#FFF"></div><div	class="sk-cube	sk-cube6"	style="background-color:	#FFF"></div><div	class="sk-cube	sk-cube7"	style="background-color:	#FFF"></div><div	class="sk-cube	sk-cube8"	style="background-color:	#FFF"></div><div	class="sk-cube	sk-cube9"	style="background-color:	#FFF"></div></div>',
+				];
+
+				let	loading_message_sub	=	'';
+				let	please_wait_spinner_index	=	Math.floor(Math.random()*please_wait_spinners.length);
+
+				window.loading_screen	=	window.pleaseWait({
+						logo:	'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==',
+						backgroundColor:	'#000',
+						loadingHtml:	please_wait_spinners[please_wait_spinner_index]	+	'<br><p	class="loading-message"	style="margin-top:	-60px;color:rgba(255,	255,	255,	0.7);	font-size:	12px;">'	+	loading_message_sub	+	'<br><span	id="_status">Connecting...</span></p>'
+				});
+		</script>
+
+		<div id="prelogin" style="color: white;">Loading...</div>
+		<script	type="text/javascript"	src="js/rmpbundle.js"></script>
+
+
+		<!--	HEADER	-->
+		<header>
+			<div id="header_content">
+				<img src="images/logo.png" alt="" width="150" height="40">
+				<hr>
+			</div>
+
+
+	    <button	id="ham_button"	style="display:	none;">&#9776;</button>
+			<div id="sidenav" class="sidenav closed">
+	      <a href="javascript:void(0)" class="closebtn" id="close_nav">&times;</a>
+	      <div id="sidemenu">
+	        <a href="index.html" id="home_item"><span class="selected">Home</span></a>
+	        <a href="#" id="about_item"><span>About</span></a>
+	        <a href="#" id="settings_item"><span>Settings</span></a>
+	        <a href="#" id="contact_item"><span>Contact</span></a>
+	        <a href="rmp.html" id="logout_button"><span>Logout</span></a>
+	      </div>
+	    </div>
+		</header>
+
+
+		<!--	LOGIN	-->
+		<div	class="main-div	login-section"	id="login_div">
+				<div	id="firebaseui-auth-container"></div>
+		</div>
+
+
+		<!--	MAIN	-->
+		<div id="main">
+			<div	id="user_div"	class="loggedin-div"	style="display:	none;">
+				<div id="inlogin" class="login-container" style="display: none;">
+			    <div class="login-form-2">
+			    		<h4 style="color: #bbb;text-align: center;">ADD DOCTOR</h4>
+			        <form id="formmain" class="main-form" onsubmit="return false;">
+							  <div class="form-group">
+							  	<h5>Personal information</h5>
+							  	<input class="ss-item-required" type="text" class="form-control" name="FN" placeholder="First Name" id="fnfield">
+							  	<input class="ss-item-required" type="text" class="form-control" name="LN" placeholder="Last Name" id="lnfield">
+							  	<input class="ss-item-required" type="number" class="form-control" name="Age" placeholder="Age" id="age" style="width: 38px;">
+							  </div>
+							  <br>
+							  <div class="form-group">
+							  	<h5>Contact information</h5>
+							  	<input class="ss-item-required" type="text" class="form-control" name="address" placeholder="Address" id="addfield" style="width: 90%;">
+							  	<br><input class="ss-item-required" type="text" class="form-control" name="city" placeholder="City" id="cityfield">
+							  	<select name="state" id="state" class="form-control">
+									<option value="Andhra Pradesh">Andhra Pradesh</option>
+									<option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+									<option value="Arunachal Pradesh">Arunachal Pradesh</option>
+									<option value="Assam">Assam</option>
+									<option value="Bihar">Bihar</option>
+									<option value="Chandigarh">Chandigarh</option>
+									<option value="Chhattisgarh">Chhattisgarh</option>
+									<option value="Dadar and Nagar Haveli">Dadar and Nagar Haveli</option>
+									<option value="Daman and Diu">Daman and Diu</option>
+									<option value="Delhi">Delhi</option>
+									<option value="Lakshadweep">Lakshadweep</option>
+									<option value="Puducherry">Puducherry</option>
+									<option value="Goa">Goa</option>
+									<option value="Gujarat">Gujarat</option>
+									<option value="Haryana">Haryana</option>
+									<option value="Himachal Pradesh">Himachal Pradesh</option>
+									<option value="Jammu and Kashmir">Jammu and Kashmir</option>
+									<option value="Jharkhand">Jharkhand</option>
+									<option value="Karnataka">Karnataka</option>
+									<option value="Kerala">Kerala</option>
+									<option value="Madhya Pradesh">Madhya Pradesh</option>
+									<option value="Maharashtra">Maharashtra</option>
+									<option value="Manipur">Manipur</option>
+									<option value="Meghalaya">Meghalaya</option>
+									<option value="Mizoram">Mizoram</option>
+									<option value="Nagaland">Nagaland</option>
+									<option value="Odisha">Odisha</option>
+									<option value="Punjab">Punjab</option>
+									<option value="Rajasthan">Rajasthan</option>
+									<option value="Sikkim">Sikkim</option>
+									<option value="Tamil Nadu">Tamil Nadu</option>
+									<option value="Telangana">Telangana</option>
+									<option value="Tripura">Tripura</option>
+									<option value="Uttar Pradesh">Uttar Pradesh</option>
+									<option value="Uttarakhand">Uttarakhand</option>
+									<option value="West Bengal">West Bengal</option>
+									</select><br>
+							  	<input class="ss-item-required" type="number" class="form-control" name="ph" placeholder="Phone number" id="ph" style="width: 90%;">
+							  </div>
+								<br>
+							  <div class="form-group">
+									<h5>Availability and Work</h5>
+								  <input type="checkbox" id="pref1" name="vehicle1" value="Bike">
+								  <label for="vehicle1"> I'm a  general physician</label><br>
+								  <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+								  <label for="vehicle2"> I'm a specialist</label>
+								  <br>
+								  <span>From: <input class="ss-item-required"  type="time" name="from" value="08:00"> To: <input class="ss-item-required"  type="time" name="to" value="22:00"></span>
+							  </div>
+							  <br>
+								<div class="form-control" style="border:none;">
+							  <span>MCI registration.</span><br>
+							  <input type="file" id="edufile" style="color:#888888;">
+								</div>
+								<br class="extraSpacing">
+							  <div class="form-control" style="border:none;">
+							  <span>Degree certificate.</span><br>
+							  <input type="file" id="regfile" style="color:#888888;">
+							  </div>
+							  <br>
+							  <input type="checkbox" name="checkbox" value="check" id="agree" /> I have read the disclaimer and agree to be contacted to provide health care services.
+							  <div>
+							  <input id="formsubmit" type="submit" class="btnSubmit" value="Submit">
+								</div>
+							</form>
+							<br><br>
+			    </div>
+				</div>
+				<div class="hint" id="noteSpace">
+		    	<h5>NOTE</h5>
+		    	<hr style="color: #fff;background: #fff;">
+		    	<p>You need to be a Registed Medical Practitioner(RMP) to provide services on this website. After you click the "Submit" button, the form-data will be sent to create a new account associated to the given details. You'll receive  a confirmation email or a call shortly, after which you can start treating patients online.</p>
+		    </div>
+		    <div class="hint" id="errorSpace" style="display: none;">
+		    	<h5 style="color: #F00;">ERROR!</h5>
+		    	<hr style="color: #fff;background: #fff;">
+		    	<p id="message"></p>
+		    </div>
+		    <div style="margin-bottom: 80px;color: #fff;">.</div>
+		  </div>
+
+			<div id="pending_div" style="display: none;">
+				<h4 style="color: #bbb;text-align: center;margin-bottom: 5px;">⚠️ REVIEW PENDING</h5>
+				<div id="clockdiv">
+				  <div class="retry_stage_a" style="display: none;">
+				  	<span>Retrying...</span>
+				  </div>
+				  <div class="retry_stage_b" style="display: none;">
+				  	<span>Retrying in</span>
+				  	<span class="seconds"></span>
+				  	<span>seconds...</span>
+				  </div>
+				  <div class="retry_stage_c" style="display: none;">
+				  	<span>Retrying in</span>
+				  	<span class="minutes"></span>
+				  	<span class="seperator">&nbsp:&nbsp</span>
+				  	<span class="seconds"></span>
+				  	<span>seconds...</span>
+				  </div>
+				</div>
+
+
+				<div class="hint" id="pendingNoteSpace">
+					<h5>NOTE</h5>
+		    	<hr style="color: #fff;background: #fff;">
+					<ul>
+						<li>Your application is being reviewed, It can take few seconds to several minutes.</li>
+						<li>You need to be a Registed Medical Practitioner(RMP) to provide services on this website.</li>
+						<li>Once approved, you'll revice a confirmation and you can <a href="rmp.html" target="_blank">login here</a> to provide services.</li>
+						<li>After loging in your <b>virtual hospital room</b> will be ready to treat COVID19 patients online.</li>
+						<li>If you need any furter support or assistance please reach out to us at: <a href="mailto:telemd@gmail.com">telemd@gmail.com</a></li>
+						<li>Please refer to the <i>latest guidelines</i> from MOH on Telemedicice for COVID19. <a href="https://www.mohfw.gov.in/pdf/Telemedicine.pdf" target="_blank">Click here</a> to read more...</li>
+						<li>You'll also recieve a <b>unique link</b> to share on social channels and extend your support to your firends and family memners</li>
+						<li>Stay tuned!</li>
+					</ul>
+		    </div>
+			</div>
+
+			<div id="verified_div" style="display: none;">
+			</div>
+
+		</div>
+
+		<!--	ABOUT	-->
+		<div	id="about"	style="display:none;">
+				<p	style="letter-spacing:	0.1em;	margin-bottom:	0;">	ABOUT	</p>
+				<p	style="font-size:	14px;">TeleMD	v1.0.0</p>
+				<br>
+				<p>TeleMD	is	a	web	application	to	connect	remote	patients	to	Doctors.	</p>
+				<br>
+				<p>Team	TeleMD<p>
+		</div>
+
+		<!--	FOOTER	-->
+		<footer	id="_footer">
+		<!--p>Made	by	Timeblur®</p-->
+		<p>DISCLAIMER: TeleMD is a technology platform to connect individuals(COVID19 patients) with participating physicians and other Registered Medical Proffesionals and licensed health care practitioners (“Providers”), for the purpose of engaging in a health care consultation. TeleMD does not provide medical care and does not interfere with the practice of medicine by licensed Providers. Participating Providers are solely responsible for their services and compliance with the latest guidelines from Ministy Of Health (MOH) Government of India on Telemedicice for COVID19. <br>Read more: <a href="https://www.mohfw.gov.in/pdf/Telemedicine.pdf" target="_blank">https://www.mohfw.gov.in/pdf/Telemedicine.pdf</a></p>
+		</footer>
+	</body>
+</html>
+
