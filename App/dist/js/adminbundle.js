@@ -1,4 +1,42 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+  try {
+    var info = gen[key](arg);
+    var value = info.value;
+  } catch (error) {
+    reject(error);
+    return;
+  }
+
+  if (info.done) {
+    resolve(value);
+  } else {
+    Promise.resolve(value).then(_next, _throw);
+  }
+}
+
+function _asyncToGenerator(fn) {
+  return function () {
+    var self = this,
+        args = arguments;
+    return new Promise(function (resolve, reject) {
+      var gen = fn.apply(self, args);
+
+      function _next(value) {
+        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
+      }
+
+      function _throw(err) {
+        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
+      }
+
+      _next(undefined);
+    });
+  };
+}
+
+module.exports = _asyncToGenerator;
+},{}],2:[function(require,module,exports){
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : {
     "default": obj
@@ -6,7 +44,7 @@ function _interopRequireDefault(obj) {
 }
 
 module.exports = _interopRequireDefault;
-},{}],2:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 var _typeof = require("../helpers/typeof");
 
 function _getRequireWildcardCache() {
@@ -62,7 +100,7 @@ function _interopRequireWildcard(obj) {
 }
 
 module.exports = _interopRequireWildcard;
-},{"../helpers/typeof":3}],3:[function(require,module,exports){
+},{"../helpers/typeof":4}],4:[function(require,module,exports){
 function _typeof(obj) {
   "@babel/helpers - typeof";
 
@@ -80,7 +118,10 @@ function _typeof(obj) {
 }
 
 module.exports = _typeof;
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
+module.exports = require("regenerator-runtime");
+
+},{"regenerator-runtime":32}],6:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -678,7 +719,7 @@ exports.resetGlobalVars = resetGlobalVars;
 exports.settings = settings;
 
 
-},{"@firebase/app":5,"@firebase/component":7,"@firebase/installations":11,"@firebase/logger":12,"@firebase/util":17,"tslib":29}],5:[function(require,module,exports){
+},{"@firebase/app":7,"@firebase/component":9,"@firebase/installations":13,"@firebase/logger":14,"@firebase/util":19,"tslib":33}],7:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -1354,7 +1395,7 @@ exports.default = firebase$1;
 exports.firebase = firebase$1;
 
 
-},{"@firebase/component":7,"@firebase/logger":12,"@firebase/util":17,"tslib":29}],6:[function(require,module,exports){
+},{"@firebase/component":9,"@firebase/logger":14,"@firebase/util":19,"tslib":33}],8:[function(require,module,exports){
 (function (global){
 (function() {var firebase = require('@firebase/app').default;/*
 
@@ -1774,7 +1815,7 @@ instanceFactory:function(b){b=b.getProvider("auth").getImmediate();return{getUid
 
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"@firebase/app":5}],7:[function(require,module,exports){
+},{"@firebase/app":7}],9:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -2091,7 +2132,7 @@ exports.ComponentContainer = ComponentContainer;
 exports.Provider = Provider;
 
 
-},{"@firebase/util":17,"tslib":29}],8:[function(require,module,exports){
+},{"@firebase/util":19,"tslib":33}],10:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -17408,7 +17449,7 @@ exports.registerDatabase = registerDatabase;
 
 
 }).call(this,require('_process'))
-},{"@firebase/app":5,"@firebase/component":7,"@firebase/logger":12,"@firebase/util":17,"_process":28,"tslib":29}],9:[function(require,module,exports){
+},{"@firebase/app":7,"@firebase/component":9,"@firebase/logger":14,"@firebase/util":19,"_process":31,"tslib":33}],11:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -32572,7 +32613,7 @@ exports.__PRIVATE_registerFirestore = Wu;
 
 
 }).call(this,require('_process'))
-},{"@firebase/app":5,"@firebase/component":7,"@firebase/logger":12,"@firebase/util":17,"@firebase/webchannel-wrapper":18,"_process":28,"tslib":29}],10:[function(require,module,exports){
+},{"@firebase/app":7,"@firebase/component":9,"@firebase/logger":14,"@firebase/util":19,"@firebase/webchannel-wrapper":20,"_process":31,"tslib":33}],12:[function(require,module,exports){
 'use strict';
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
@@ -33197,7 +33238,7 @@ registerFunctions(firebase);
 firebase.registerVersion(name, version);
 
 
-},{"@firebase/app":5,"@firebase/component":7,"tslib":29}],11:[function(require,module,exports){
+},{"@firebase/app":7,"@firebase/component":9,"tslib":33}],13:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -34533,7 +34574,7 @@ registerInstallations(firebase);
 exports.registerInstallations = registerInstallations;
 
 
-},{"@firebase/app":5,"@firebase/component":7,"@firebase/util":17,"idb":25,"tslib":29}],12:[function(require,module,exports){
+},{"@firebase/app":7,"@firebase/component":9,"@firebase/util":19,"idb":27,"tslib":33}],14:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -34813,7 +34854,7 @@ exports.setLogLevel = setLogLevel;
 exports.setUserLogHandler = setUserLogHandler;
 
 
-},{}],13:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 'use strict';
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
@@ -36404,7 +36445,7 @@ function isSWControllerSupported() {
 }
 
 
-},{"@firebase/app":5,"@firebase/component":7,"@firebase/installations":11,"@firebase/util":17,"idb":25,"tslib":29}],14:[function(require,module,exports){
+},{"@firebase/app":7,"@firebase/component":9,"@firebase/installations":13,"@firebase/util":19,"idb":27,"tslib":33}],16:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -37751,7 +37792,7 @@ registerPerformance(firebase);
 exports.registerPerformance = registerPerformance;
 
 
-},{"@firebase/app":5,"@firebase/component":7,"@firebase/installations":11,"@firebase/logger":12,"@firebase/util":17,"tslib":29}],15:[function(require,module,exports){
+},{"@firebase/app":7,"@firebase/component":9,"@firebase/installations":13,"@firebase/logger":14,"@firebase/util":19,"tslib":33}],17:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -38988,7 +39029,7 @@ registerRemoteConfig(firebase);
 exports.registerRemoteConfig = registerRemoteConfig;
 
 
-},{"@firebase/app":5,"@firebase/component":7,"@firebase/installations":11,"@firebase/logger":12,"@firebase/util":17,"tslib":29}],16:[function(require,module,exports){
+},{"@firebase/app":7,"@firebase/component":9,"@firebase/installations":13,"@firebase/logger":14,"@firebase/util":19,"tslib":33}],18:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -42571,7 +42612,7 @@ registerStorage(firebase);
 exports.registerStorage = registerStorage;
 
 
-},{"@firebase/app":5,"@firebase/component":7,"tslib":29}],17:[function(require,module,exports){
+},{"@firebase/app":7,"@firebase/component":9,"tslib":33}],19:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -44222,7 +44263,7 @@ exports.validateNamespace = validateNamespace;
 
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"tslib":29}],18:[function(require,module,exports){
+},{"tslib":33}],20:[function(require,module,exports){
 (function (global){
 (function() {/*
 
@@ -44321,7 +44362,7 @@ X.prototype.getResponseText=X.prototype.aa;X.prototype.send=X.prototype.ca;modul
 
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],19:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 /*!
   * Bootstrap v4.4.1 (https://getbootstrap.com/)
   * Copyright 2011-2019 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
@@ -48844,7 +48885,7 @@ X.prototype.getResponseText=X.prototype.aa;X.prototype.send=X.prototype.ca;modul
 })));
 
 
-},{"jquery":26,"popper.js":27}],20:[function(require,module,exports){
+},{"jquery":28,"popper.js":30}],22:[function(require,module,exports){
 (function() {
 
   // nb. This is for IE10 and lower _only_.
@@ -49584,7 +49625,7 @@ X.prototype.getResponseText=X.prototype.aa;X.prototype.send=X.prototype.ca;modul
   }
 })();
 
-},{}],21:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 'use strict';
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
@@ -49615,14 +49656,14 @@ firebase.registerVersion(name, version, 'app');
 module.exports = firebase;
 
 
-},{"@firebase/app":5}],22:[function(require,module,exports){
+},{"@firebase/app":7}],24:[function(require,module,exports){
 'use strict';
 
 require('@firebase/auth');
 
 
 
-},{"@firebase/auth":6}],23:[function(require,module,exports){
+},{"@firebase/auth":8}],25:[function(require,module,exports){
 'use strict';
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
@@ -49684,7 +49725,7 @@ firebase.registerVersion(name$1, version$1);
 module.exports = firebase;
 
 
-},{"@firebase/analytics":4,"@firebase/app":5,"@firebase/auth":6,"@firebase/database":8,"@firebase/firestore":9,"@firebase/functions":10,"@firebase/messaging":13,"@firebase/performance":14,"@firebase/remote-config":15,"@firebase/storage":16}],24:[function(require,module,exports){
+},{"@firebase/analytics":6,"@firebase/app":7,"@firebase/auth":8,"@firebase/database":10,"@firebase/firestore":11,"@firebase/functions":12,"@firebase/messaging":15,"@firebase/performance":16,"@firebase/remote-config":17,"@firebase/storage":18}],26:[function(require,module,exports){
 (function (global){
 (function() { var firebase=require('firebase/app');require('firebase/auth');if(typeof firebase.default!=='undefined'){firebase=firebase.default;}(function(){var supportCustomEvent=window.CustomEvent;if(!supportCustomEvent||typeof supportCustomEvent==="object"){supportCustomEvent=function CustomEvent(event,x){x=x||{};var ev=document.createEvent("CustomEvent");ev.initCustomEvent(event,!!x.bubbles,!!x.cancelable,x.detail||null);return ev};supportCustomEvent.prototype=window.Event.prototype}function createsStackingContext(el){while(el&&el!==document.body){var s=window.getComputedStyle(el);var invalid=function(k,ok){return!(s[k]===undefined||s[k]===
 ok)};if(s.opacity<1||invalid("zIndex","auto")||invalid("transform","none")||invalid("mixBlendMode","normal")||invalid("filter","none")||invalid("perspective","none")||s["isolation"]==="isolate"||s.position==="fixed"||s.webkitOverflowScrolling==="touch")return true;el=el.parentElement}return false}function findNearestDialog(el){while(el){if(el.localName==="dialog")return el;el=el.parentElement}return null}function safeBlur(el){if(el&&el.blur&&el!==document.body)el.blur()}function inNodeList(nodeList,
@@ -50154,7 +50195,7 @@ Ao.prototype.reset);v("firebaseui.auth.AuthUI.prototype.delete",Ao.prototype.Xa)
 Ze.prototype.ta;Ze.prototype["finally"]=Ze.prototype.ec}).apply(typeof global!=="undefined"?global:typeof self!=="undefined"?self:window); if(typeof window!=='undefined'){window.dialogPolyfill=require('dialog-polyfill');}})();module.exports=firebaseui;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"dialog-polyfill":20,"firebase/app":21,"firebase/auth":22}],25:[function(require,module,exports){
+},{"dialog-polyfill":22,"firebase/app":23,"firebase/auth":24}],27:[function(require,module,exports){
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
   typeof define === 'function' && define.amd ? define(['exports'], factory) :
@@ -50472,7 +50513,7 @@ Ze.prototype.ta;Ze.prototype["finally"]=Ze.prototype.ec}).apply(typeof global!==
 
 }));
 
-},{}],26:[function(require,module,exports){
+},{}],28:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v3.4.1
  * https://jquery.com/
@@ -61072,7 +61113,416 @@ if ( !noGlobal ) {
 return jQuery;
 } );
 
-},{}],27:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation. All rights reserved.
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+this file except in compliance with the License. You may obtain a copy of the
+License at http://www.apache.org/licenses/LICENSE-2.0
+
+THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
+MERCHANTABLITY OR NON-INFRINGEMENT.
+
+See the Apache Version 2.0 License for specific language governing permissions
+and limitations under the License.
+***************************************************************************** */
+
+var __assign = function() {
+    __assign = Object.assign || function __assign(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+
+var NotyfNotification = /** @class */ (function () {
+    function NotyfNotification(options) {
+        this.options = options;
+    }
+    return NotyfNotification;
+}());
+(function (NotyfArrayEvent) {
+    NotyfArrayEvent[NotyfArrayEvent["Add"] = 0] = "Add";
+    NotyfArrayEvent[NotyfArrayEvent["Remove"] = 1] = "Remove";
+})(exports.NotyfArrayEvent || (exports.NotyfArrayEvent = {}));
+var NotyfArray = /** @class */ (function () {
+    function NotyfArray() {
+        this.notifications = [];
+    }
+    NotyfArray.prototype.push = function (elem) {
+        this.notifications.push(elem);
+        this.updateFn(elem, exports.NotyfArrayEvent.Add, this.notifications);
+    };
+    NotyfArray.prototype.splice = function (index, num) {
+        var elem = this.notifications.splice(index, num)[0];
+        this.updateFn(elem, exports.NotyfArrayEvent.Remove, this.notifications);
+    };
+    NotyfArray.prototype.indexOf = function (elem) {
+        return this.notifications.indexOf(elem);
+    };
+    NotyfArray.prototype.onUpdate = function (fn) {
+        this.updateFn = fn;
+    };
+    return NotyfArray;
+}());
+
+(function (NotyfEvent) {
+    NotyfEvent[NotyfEvent["Dismiss"] = 0] = "Dismiss";
+})(exports.NotyfEvent || (exports.NotyfEvent = {}));
+var DEFAULT_OPTIONS = {
+    types: [
+        {
+            type: 'success',
+            className: 'notyf__toast--success',
+            backgroundColor: '#3dc763',
+            icon: {
+                className: 'notyf__icon--success',
+                tagName: 'i',
+            },
+        },
+        {
+            type: 'error',
+            className: 'notyf__toast--error',
+            backgroundColor: '#ed3d3d',
+            icon: {
+                className: 'notyf__icon--error',
+                tagName: 'i',
+            },
+        },
+    ],
+    duration: 2000,
+    ripple: true,
+    position: {
+        x: 'right',
+        y: 'bottom',
+    },
+    dismissible: false,
+};
+
+var NotyfView = /** @class */ (function () {
+    function NotyfView() {
+        this.notifications = [];
+        this.X_POSITION_FLEX_MAP = {
+            left: 'flex-start',
+            center: 'center',
+            right: 'flex-end',
+        };
+        this.Y_POSITION_FLEX_MAP = {
+            top: 'flex-start',
+            center: 'center',
+            bottom: 'flex-end',
+        };
+        // Creates the main notifications container
+        var docFrag = document.createDocumentFragment();
+        var notyfContainer = this._createHTLMElement({ tagName: 'div', className: 'notyf' });
+        docFrag.appendChild(notyfContainer);
+        document.body.appendChild(docFrag);
+        this.container = notyfContainer;
+        // Identifies the main animation end event
+        this.animationEndEventName = this._getAnimationEndEventName();
+        this._createA11yContainer();
+    }
+    NotyfView.prototype.on = function (event, cb) {
+        var _a;
+        this.events = __assign(__assign({}, this.events), (_a = {}, _a[event] = cb, _a));
+    };
+    NotyfView.prototype.update = function (notification, type) {
+        if (type === exports.NotyfArrayEvent.Add) {
+            this.addNotification(notification);
+        }
+        else if (type === exports.NotyfArrayEvent.Remove) {
+            this.removeNotification(notification);
+        }
+    };
+    NotyfView.prototype.removeNotification = function (notification) {
+        var _this = this;
+        var renderedNotification = this._popRenderedNotification(notification);
+        var node;
+        if (!renderedNotification) {
+            return;
+        }
+        node = renderedNotification.node;
+        node.classList.add('notyf__toast--disappear');
+        var handleEvent;
+        node.addEventListener(this.animationEndEventName, handleEvent = function (event) {
+            if (event.target === node) {
+                node.removeEventListener(_this.animationEndEventName, handleEvent);
+                _this.container.removeChild(node);
+            }
+        });
+    };
+    NotyfView.prototype.addNotification = function (notification) {
+        var node = this._renderNotification(notification);
+        this.notifications.push({ notification: notification, node: node });
+        // For a11y purposes, we still want to announce that there's a notification in the screen
+        // even if it comes with no message.
+        this._announce(notification.options.message || 'Notification');
+    };
+    NotyfView.prototype._renderNotification = function (notification) {
+        var _a;
+        var card = this._buildNotificationCard(notification);
+        var className = notification.options.className;
+        if (className) {
+            (_a = card.classList).add.apply(_a, className.split(' '));
+        }
+        this.container.appendChild(card);
+        return card;
+    };
+    NotyfView.prototype._popRenderedNotification = function (notification) {
+        var idx = -1;
+        for (var i = 0; i < this.notifications.length && idx < 0; i++) {
+            if (this.notifications[i].notification === notification) {
+                idx = i;
+            }
+        }
+        if (idx !== -1) {
+            return this.notifications.splice(idx, 1)[0];
+        }
+        return;
+    };
+    NotyfView.prototype.getXPosition = function (options) {
+        var _a;
+        return ((_a = options === null || options === void 0 ? void 0 : options.position) === null || _a === void 0 ? void 0 : _a.x) || 'right';
+    };
+    NotyfView.prototype.getYPosition = function (options) {
+        var _a;
+        return ((_a = options === null || options === void 0 ? void 0 : options.position) === null || _a === void 0 ? void 0 : _a.y) || 'bottom';
+    };
+    NotyfView.prototype.adjustContainerAlignment = function (options) {
+        var align = this.X_POSITION_FLEX_MAP[this.getXPosition(options)];
+        var justify = this.Y_POSITION_FLEX_MAP[this.getYPosition(options)];
+        var style = this.container.style;
+        style.setProperty('justify-content', justify);
+        style.setProperty('align-items', align);
+    };
+    NotyfView.prototype._buildNotificationCard = function (notification) {
+        var _this = this;
+        var options = notification.options;
+        var iconOpts = options.icon;
+        // Adjust container according to position (e.g. top-left, bottom-center, etc)
+        this.adjustContainerAlignment(options);
+        // Create elements
+        var notificationElem = this._createHTLMElement({ tagName: 'div', className: 'notyf__toast' });
+        var ripple = this._createHTLMElement({ tagName: 'div', className: 'notyf__ripple' });
+        var wrapper = this._createHTLMElement({ tagName: 'div', className: 'notyf__wrapper' });
+        var message = this._createHTLMElement({ tagName: 'div', className: 'notyf__message' });
+        message.innerHTML = options.message || '';
+        var color = options.backgroundColor;
+        // Build the icon and append it to the card
+        if (iconOpts && typeof iconOpts === 'object') {
+            var iconContainer = this._createHTLMElement({ tagName: 'div', className: 'notyf__icon' });
+            var icon = this._createHTLMElement({
+                tagName: iconOpts.tagName || 'i',
+                className: iconOpts.className,
+                text: iconOpts.text,
+            });
+            if (color) {
+                icon.style.color = color;
+            }
+            iconContainer.appendChild(icon);
+            wrapper.appendChild(iconContainer);
+        }
+        wrapper.appendChild(message);
+        notificationElem.appendChild(wrapper);
+        // Add ripple if applicable, else just paint the full toast
+        if (color) {
+            if (options.ripple) {
+                ripple.style.backgroundColor = color;
+                notificationElem.appendChild(ripple);
+            }
+            else {
+                notificationElem.style.backgroundColor = color;
+            }
+        }
+        // Add dismiss button
+        if (options.dismissible) {
+            var dismissWrapper = this._createHTLMElement({ tagName: 'div', className: 'notyf__dismiss' });
+            var dismissButton = this._createHTLMElement({
+                tagName: 'button',
+                className: 'notyf__dismiss-btn',
+            });
+            dismissWrapper.appendChild(dismissButton);
+            wrapper.appendChild(dismissWrapper);
+            notificationElem.classList.add("notyf__toast--dismissible");
+            dismissButton.addEventListener('click', function () { var _a; return (_a = _this.events) === null || _a === void 0 ? void 0 : _a[exports.NotyfEvent.Dismiss](notification); });
+        }
+        // Adjust margins depending on whether its an upper or lower notification
+        var className = this.getYPosition(options) === 'top' ? 'upper' : 'lower';
+        notificationElem.classList.add("notyf__toast--" + className);
+        return notificationElem;
+    };
+    NotyfView.prototype._createHTLMElement = function (_a) {
+        var tagName = _a.tagName, className = _a.className, text = _a.text;
+        var elem = document.createElement(tagName);
+        if (className) {
+            elem.className = className;
+        }
+        elem.textContent = text || null;
+        return elem;
+    };
+    /**
+     * Creates an invisible container which will announce the notyfs to
+     * screen readers
+     */
+    NotyfView.prototype._createA11yContainer = function () {
+        var a11yContainer = this._createHTLMElement({ tagName: 'div', className: 'notyf-announcer' });
+        a11yContainer.setAttribute('aria-atomic', 'true');
+        a11yContainer.setAttribute('aria-live', 'polite');
+        // Set the a11y container to be visible hidden. Can't use display: none as
+        // screen readers won't read it.
+        a11yContainer.style.border = '0';
+        a11yContainer.style.clip = 'rect(0 0 0 0)';
+        a11yContainer.style.height = '1px';
+        a11yContainer.style.margin = '-1px';
+        a11yContainer.style.overflow = 'hidden';
+        a11yContainer.style.padding = '0';
+        a11yContainer.style.position = 'absolute';
+        a11yContainer.style.width = '1px';
+        a11yContainer.style.outline = '0';
+        document.body.appendChild(a11yContainer);
+        this.a11yContainer = a11yContainer;
+    };
+    /**
+     * Announces a message to screenreaders.
+     */
+    NotyfView.prototype._announce = function (message) {
+        var _this = this;
+        this.a11yContainer.textContent = '';
+        // This 100ms timeout is necessary for some browser + screen-reader combinations:
+        // - Both JAWS and NVDA over IE11 will not announce anything without a non-zero timeout.
+        // - With Chrome and IE11 with NVDA or JAWS, a repeated (identical) message won't be read a
+        //   second time without clearing and then using a non-zero delay.
+        // (using JAWS 17 at time of this writing).
+        // https://github.com/angular/material2/blob/master/src/cdk/a11y/live-announcer/live-announcer.ts
+        setTimeout(function () {
+            _this.a11yContainer.textContent = message;
+        }, 100);
+    };
+    /**
+     * Determine which animationend event is supported
+     */
+    NotyfView.prototype._getAnimationEndEventName = function () {
+        var el = document.createElement('_fake');
+        var transitions = {
+            MozTransition: 'animationend',
+            OTransition: 'oAnimationEnd',
+            WebkitTransition: 'webkitAnimationEnd',
+            transition: 'animationend',
+        };
+        var t;
+        for (t in transitions) {
+            if (el.style[t] !== undefined) {
+                return transitions[t];
+            }
+        }
+        // No supported animation end event. Using "animationend" as a fallback
+        return 'animationend';
+    };
+    return NotyfView;
+}());
+
+/**
+ * Main controller class. Defines the main Notyf API.
+ */
+var Notyf = /** @class */ (function () {
+    function Notyf(opts) {
+        var _this = this;
+        this.notifications = new NotyfArray();
+        this.view = new NotyfView();
+        var types = this.registerTypes(opts);
+        this.options = __assign(__assign({}, DEFAULT_OPTIONS), opts);
+        this.options.types = types;
+        this.notifications.onUpdate(function (elem, type) { return _this.view.update(elem, type); });
+        this.view.on(exports.NotyfEvent.Dismiss, function (elem) { return _this._removeNotification(elem); });
+    }
+    Notyf.prototype.error = function (payload) {
+        var options = this.normalizeOptions('error', payload);
+        this.open(options);
+    };
+    Notyf.prototype.success = function (payload) {
+        var options = this.normalizeOptions('success', payload);
+        this.open(options);
+    };
+    Notyf.prototype.open = function (options) {
+        var defaultOpts = this.options.types.find(function (_a) {
+            var type = _a.type;
+            return type === options.type;
+        }) || {};
+        var config = __assign(__assign({}, defaultOpts), options);
+        this.assignProps(['ripple', 'position', 'dismissible'], config);
+        var notification = new NotyfNotification(config);
+        this._pushNotification(notification);
+    };
+    /**
+     * Assigns properties to a config object based on two rules:
+     * 1. If the config object already sets that prop, leave it as so
+     * 2. Otherwise, use the default prop from the global options
+     *
+     * It's intended to build the final config object to open a notification. e.g. if
+     * 'dismissible' is not set, then use the value from the global config.
+     *
+     * @param props - properties to be assigned to the config object
+     * @param config - object whose properties need to be set
+     */
+    Notyf.prototype.assignProps = function (props, config) {
+        var _this = this;
+        props.forEach(function (prop) {
+            // intentional double equality to check for both null and undefined
+            config[prop] = config[prop] == null ? _this.options[prop] : config[prop];
+        });
+    };
+    Notyf.prototype._pushNotification = function (notification) {
+        var _this = this;
+        this.notifications.push(notification);
+        var duration = notification.options.duration || this.options.duration;
+        setTimeout(function () { return _this._removeNotification(notification); }, duration);
+    };
+    Notyf.prototype._removeNotification = function (notification) {
+        var index = this.notifications.indexOf(notification);
+        if (index !== -1) {
+            this.notifications.splice(index, 1);
+        }
+    };
+    Notyf.prototype.normalizeOptions = function (type, payload) {
+        var options = { type: type };
+        if (typeof payload === 'string') {
+            options.message = payload;
+        }
+        else if (typeof payload === 'object') {
+            options = __assign(__assign({}, options), payload);
+        }
+        return options;
+    };
+    Notyf.prototype.registerTypes = function (opts) {
+        var incomingTypes = (opts && opts.types || []).slice();
+        var finalTypes = DEFAULT_OPTIONS.types.map(function (defaultType) {
+            // find if there's a default type within the user input's types, if so, it means the user
+            // wants to change some of the default settings
+            var userTypeIdx = incomingTypes.findIndex(function (t) { return t.type === defaultType.type; });
+            var userType = userTypeIdx !== -1 ? incomingTypes.splice(userTypeIdx, 1)[0] : {};
+            return __assign(__assign({}, defaultType), userType);
+        });
+        return finalTypes.concat(incomingTypes);
+    };
+    return Notyf;
+}());
+
+exports.DEFAULT_OPTIONS = DEFAULT_OPTIONS;
+exports.Notyf = Notyf;
+exports.NotyfArray = NotyfArray;
+exports.NotyfNotification = NotyfNotification;
+exports.NotyfView = NotyfView;
+
+},{}],30:[function(require,module,exports){
 (function (global){
 /**!
  * @fileOverview Kickass library to create and place poppers near their reference elements.
@@ -63700,7 +64150,7 @@ return Popper;
 
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],28:[function(require,module,exports){
+},{}],31:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -63886,7 +64336,738 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],29:[function(require,module,exports){
+},{}],32:[function(require,module,exports){
+/**
+ * Copyright (c) 2014-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+var runtime = (function (exports) {
+  "use strict";
+
+  var Op = Object.prototype;
+  var hasOwn = Op.hasOwnProperty;
+  var undefined; // More compressible than void 0.
+  var $Symbol = typeof Symbol === "function" ? Symbol : {};
+  var iteratorSymbol = $Symbol.iterator || "@@iterator";
+  var asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator";
+  var toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag";
+
+  function wrap(innerFn, outerFn, self, tryLocsList) {
+    // If outerFn provided and outerFn.prototype is a Generator, then outerFn.prototype instanceof Generator.
+    var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator;
+    var generator = Object.create(protoGenerator.prototype);
+    var context = new Context(tryLocsList || []);
+
+    // The ._invoke method unifies the implementations of the .next,
+    // .throw, and .return methods.
+    generator._invoke = makeInvokeMethod(innerFn, self, context);
+
+    return generator;
+  }
+  exports.wrap = wrap;
+
+  // Try/catch helper to minimize deoptimizations. Returns a completion
+  // record like context.tryEntries[i].completion. This interface could
+  // have been (and was previously) designed to take a closure to be
+  // invoked without arguments, but in all the cases we care about we
+  // already have an existing method we want to call, so there's no need
+  // to create a new function object. We can even get away with assuming
+  // the method takes exactly one argument, since that happens to be true
+  // in every case, so we don't have to touch the arguments object. The
+  // only additional allocation required is the completion record, which
+  // has a stable shape and so hopefully should be cheap to allocate.
+  function tryCatch(fn, obj, arg) {
+    try {
+      return { type: "normal", arg: fn.call(obj, arg) };
+    } catch (err) {
+      return { type: "throw", arg: err };
+    }
+  }
+
+  var GenStateSuspendedStart = "suspendedStart";
+  var GenStateSuspendedYield = "suspendedYield";
+  var GenStateExecuting = "executing";
+  var GenStateCompleted = "completed";
+
+  // Returning this object from the innerFn has the same effect as
+  // breaking out of the dispatch switch statement.
+  var ContinueSentinel = {};
+
+  // Dummy constructor functions that we use as the .constructor and
+  // .constructor.prototype properties for functions that return Generator
+  // objects. For full spec compliance, you may wish to configure your
+  // minifier not to mangle the names of these two functions.
+  function Generator() {}
+  function GeneratorFunction() {}
+  function GeneratorFunctionPrototype() {}
+
+  // This is a polyfill for %IteratorPrototype% for environments that
+  // don't natively support it.
+  var IteratorPrototype = {};
+  IteratorPrototype[iteratorSymbol] = function () {
+    return this;
+  };
+
+  var getProto = Object.getPrototypeOf;
+  var NativeIteratorPrototype = getProto && getProto(getProto(values([])));
+  if (NativeIteratorPrototype &&
+      NativeIteratorPrototype !== Op &&
+      hasOwn.call(NativeIteratorPrototype, iteratorSymbol)) {
+    // This environment has a native %IteratorPrototype%; use it instead
+    // of the polyfill.
+    IteratorPrototype = NativeIteratorPrototype;
+  }
+
+  var Gp = GeneratorFunctionPrototype.prototype =
+    Generator.prototype = Object.create(IteratorPrototype);
+  GeneratorFunction.prototype = Gp.constructor = GeneratorFunctionPrototype;
+  GeneratorFunctionPrototype.constructor = GeneratorFunction;
+  GeneratorFunctionPrototype[toStringTagSymbol] =
+    GeneratorFunction.displayName = "GeneratorFunction";
+
+  // Helper for defining the .next, .throw, and .return methods of the
+  // Iterator interface in terms of a single ._invoke method.
+  function defineIteratorMethods(prototype) {
+    ["next", "throw", "return"].forEach(function(method) {
+      prototype[method] = function(arg) {
+        return this._invoke(method, arg);
+      };
+    });
+  }
+
+  exports.isGeneratorFunction = function(genFun) {
+    var ctor = typeof genFun === "function" && genFun.constructor;
+    return ctor
+      ? ctor === GeneratorFunction ||
+        // For the native GeneratorFunction constructor, the best we can
+        // do is to check its .name property.
+        (ctor.displayName || ctor.name) === "GeneratorFunction"
+      : false;
+  };
+
+  exports.mark = function(genFun) {
+    if (Object.setPrototypeOf) {
+      Object.setPrototypeOf(genFun, GeneratorFunctionPrototype);
+    } else {
+      genFun.__proto__ = GeneratorFunctionPrototype;
+      if (!(toStringTagSymbol in genFun)) {
+        genFun[toStringTagSymbol] = "GeneratorFunction";
+      }
+    }
+    genFun.prototype = Object.create(Gp);
+    return genFun;
+  };
+
+  // Within the body of any async function, `await x` is transformed to
+  // `yield regeneratorRuntime.awrap(x)`, so that the runtime can test
+  // `hasOwn.call(value, "__await")` to determine if the yielded value is
+  // meant to be awaited.
+  exports.awrap = function(arg) {
+    return { __await: arg };
+  };
+
+  function AsyncIterator(generator, PromiseImpl) {
+    function invoke(method, arg, resolve, reject) {
+      var record = tryCatch(generator[method], generator, arg);
+      if (record.type === "throw") {
+        reject(record.arg);
+      } else {
+        var result = record.arg;
+        var value = result.value;
+        if (value &&
+            typeof value === "object" &&
+            hasOwn.call(value, "__await")) {
+          return PromiseImpl.resolve(value.__await).then(function(value) {
+            invoke("next", value, resolve, reject);
+          }, function(err) {
+            invoke("throw", err, resolve, reject);
+          });
+        }
+
+        return PromiseImpl.resolve(value).then(function(unwrapped) {
+          // When a yielded Promise is resolved, its final value becomes
+          // the .value of the Promise<{value,done}> result for the
+          // current iteration.
+          result.value = unwrapped;
+          resolve(result);
+        }, function(error) {
+          // If a rejected Promise was yielded, throw the rejection back
+          // into the async generator function so it can be handled there.
+          return invoke("throw", error, resolve, reject);
+        });
+      }
+    }
+
+    var previousPromise;
+
+    function enqueue(method, arg) {
+      function callInvokeWithMethodAndArg() {
+        return new PromiseImpl(function(resolve, reject) {
+          invoke(method, arg, resolve, reject);
+        });
+      }
+
+      return previousPromise =
+        // If enqueue has been called before, then we want to wait until
+        // all previous Promises have been resolved before calling invoke,
+        // so that results are always delivered in the correct order. If
+        // enqueue has not been called before, then it is important to
+        // call invoke immediately, without waiting on a callback to fire,
+        // so that the async generator function has the opportunity to do
+        // any necessary setup in a predictable way. This predictability
+        // is why the Promise constructor synchronously invokes its
+        // executor callback, and why async functions synchronously
+        // execute code before the first await. Since we implement simple
+        // async functions in terms of async generators, it is especially
+        // important to get this right, even though it requires care.
+        previousPromise ? previousPromise.then(
+          callInvokeWithMethodAndArg,
+          // Avoid propagating failures to Promises returned by later
+          // invocations of the iterator.
+          callInvokeWithMethodAndArg
+        ) : callInvokeWithMethodAndArg();
+    }
+
+    // Define the unified helper method that is used to implement .next,
+    // .throw, and .return (see defineIteratorMethods).
+    this._invoke = enqueue;
+  }
+
+  defineIteratorMethods(AsyncIterator.prototype);
+  AsyncIterator.prototype[asyncIteratorSymbol] = function () {
+    return this;
+  };
+  exports.AsyncIterator = AsyncIterator;
+
+  // Note that simple async functions are implemented on top of
+  // AsyncIterator objects; they just return a Promise for the value of
+  // the final result produced by the iterator.
+  exports.async = function(innerFn, outerFn, self, tryLocsList, PromiseImpl) {
+    if (PromiseImpl === void 0) PromiseImpl = Promise;
+
+    var iter = new AsyncIterator(
+      wrap(innerFn, outerFn, self, tryLocsList),
+      PromiseImpl
+    );
+
+    return exports.isGeneratorFunction(outerFn)
+      ? iter // If outerFn is a generator, return the full iterator.
+      : iter.next().then(function(result) {
+          return result.done ? result.value : iter.next();
+        });
+  };
+
+  function makeInvokeMethod(innerFn, self, context) {
+    var state = GenStateSuspendedStart;
+
+    return function invoke(method, arg) {
+      if (state === GenStateExecuting) {
+        throw new Error("Generator is already running");
+      }
+
+      if (state === GenStateCompleted) {
+        if (method === "throw") {
+          throw arg;
+        }
+
+        // Be forgiving, per 25.3.3.3.3 of the spec:
+        // https://people.mozilla.org/~jorendorff/es6-draft.html#sec-generatorresume
+        return doneResult();
+      }
+
+      context.method = method;
+      context.arg = arg;
+
+      while (true) {
+        var delegate = context.delegate;
+        if (delegate) {
+          var delegateResult = maybeInvokeDelegate(delegate, context);
+          if (delegateResult) {
+            if (delegateResult === ContinueSentinel) continue;
+            return delegateResult;
+          }
+        }
+
+        if (context.method === "next") {
+          // Setting context._sent for legacy support of Babel's
+          // function.sent implementation.
+          context.sent = context._sent = context.arg;
+
+        } else if (context.method === "throw") {
+          if (state === GenStateSuspendedStart) {
+            state = GenStateCompleted;
+            throw context.arg;
+          }
+
+          context.dispatchException(context.arg);
+
+        } else if (context.method === "return") {
+          context.abrupt("return", context.arg);
+        }
+
+        state = GenStateExecuting;
+
+        var record = tryCatch(innerFn, self, context);
+        if (record.type === "normal") {
+          // If an exception is thrown from innerFn, we leave state ===
+          // GenStateExecuting and loop back for another invocation.
+          state = context.done
+            ? GenStateCompleted
+            : GenStateSuspendedYield;
+
+          if (record.arg === ContinueSentinel) {
+            continue;
+          }
+
+          return {
+            value: record.arg,
+            done: context.done
+          };
+
+        } else if (record.type === "throw") {
+          state = GenStateCompleted;
+          // Dispatch the exception by looping back around to the
+          // context.dispatchException(context.arg) call above.
+          context.method = "throw";
+          context.arg = record.arg;
+        }
+      }
+    };
+  }
+
+  // Call delegate.iterator[context.method](context.arg) and handle the
+  // result, either by returning a { value, done } result from the
+  // delegate iterator, or by modifying context.method and context.arg,
+  // setting context.delegate to null, and returning the ContinueSentinel.
+  function maybeInvokeDelegate(delegate, context) {
+    var method = delegate.iterator[context.method];
+    if (method === undefined) {
+      // A .throw or .return when the delegate iterator has no .throw
+      // method always terminates the yield* loop.
+      context.delegate = null;
+
+      if (context.method === "throw") {
+        // Note: ["return"] must be used for ES3 parsing compatibility.
+        if (delegate.iterator["return"]) {
+          // If the delegate iterator has a return method, give it a
+          // chance to clean up.
+          context.method = "return";
+          context.arg = undefined;
+          maybeInvokeDelegate(delegate, context);
+
+          if (context.method === "throw") {
+            // If maybeInvokeDelegate(context) changed context.method from
+            // "return" to "throw", let that override the TypeError below.
+            return ContinueSentinel;
+          }
+        }
+
+        context.method = "throw";
+        context.arg = new TypeError(
+          "The iterator does not provide a 'throw' method");
+      }
+
+      return ContinueSentinel;
+    }
+
+    var record = tryCatch(method, delegate.iterator, context.arg);
+
+    if (record.type === "throw") {
+      context.method = "throw";
+      context.arg = record.arg;
+      context.delegate = null;
+      return ContinueSentinel;
+    }
+
+    var info = record.arg;
+
+    if (! info) {
+      context.method = "throw";
+      context.arg = new TypeError("iterator result is not an object");
+      context.delegate = null;
+      return ContinueSentinel;
+    }
+
+    if (info.done) {
+      // Assign the result of the finished delegate to the temporary
+      // variable specified by delegate.resultName (see delegateYield).
+      context[delegate.resultName] = info.value;
+
+      // Resume execution at the desired location (see delegateYield).
+      context.next = delegate.nextLoc;
+
+      // If context.method was "throw" but the delegate handled the
+      // exception, let the outer generator proceed normally. If
+      // context.method was "next", forget context.arg since it has been
+      // "consumed" by the delegate iterator. If context.method was
+      // "return", allow the original .return call to continue in the
+      // outer generator.
+      if (context.method !== "return") {
+        context.method = "next";
+        context.arg = undefined;
+      }
+
+    } else {
+      // Re-yield the result returned by the delegate method.
+      return info;
+    }
+
+    // The delegate iterator is finished, so forget it and continue with
+    // the outer generator.
+    context.delegate = null;
+    return ContinueSentinel;
+  }
+
+  // Define Generator.prototype.{next,throw,return} in terms of the
+  // unified ._invoke helper method.
+  defineIteratorMethods(Gp);
+
+  Gp[toStringTagSymbol] = "Generator";
+
+  // A Generator should always return itself as the iterator object when the
+  // @@iterator function is called on it. Some browsers' implementations of the
+  // iterator prototype chain incorrectly implement this, causing the Generator
+  // object to not be returned from this call. This ensures that doesn't happen.
+  // See https://github.com/facebook/regenerator/issues/274 for more details.
+  Gp[iteratorSymbol] = function() {
+    return this;
+  };
+
+  Gp.toString = function() {
+    return "[object Generator]";
+  };
+
+  function pushTryEntry(locs) {
+    var entry = { tryLoc: locs[0] };
+
+    if (1 in locs) {
+      entry.catchLoc = locs[1];
+    }
+
+    if (2 in locs) {
+      entry.finallyLoc = locs[2];
+      entry.afterLoc = locs[3];
+    }
+
+    this.tryEntries.push(entry);
+  }
+
+  function resetTryEntry(entry) {
+    var record = entry.completion || {};
+    record.type = "normal";
+    delete record.arg;
+    entry.completion = record;
+  }
+
+  function Context(tryLocsList) {
+    // The root entry object (effectively a try statement without a catch
+    // or a finally block) gives us a place to store values thrown from
+    // locations where there is no enclosing try statement.
+    this.tryEntries = [{ tryLoc: "root" }];
+    tryLocsList.forEach(pushTryEntry, this);
+    this.reset(true);
+  }
+
+  exports.keys = function(object) {
+    var keys = [];
+    for (var key in object) {
+      keys.push(key);
+    }
+    keys.reverse();
+
+    // Rather than returning an object with a next method, we keep
+    // things simple and return the next function itself.
+    return function next() {
+      while (keys.length) {
+        var key = keys.pop();
+        if (key in object) {
+          next.value = key;
+          next.done = false;
+          return next;
+        }
+      }
+
+      // To avoid creating an additional object, we just hang the .value
+      // and .done properties off the next function object itself. This
+      // also ensures that the minifier will not anonymize the function.
+      next.done = true;
+      return next;
+    };
+  };
+
+  function values(iterable) {
+    if (iterable) {
+      var iteratorMethod = iterable[iteratorSymbol];
+      if (iteratorMethod) {
+        return iteratorMethod.call(iterable);
+      }
+
+      if (typeof iterable.next === "function") {
+        return iterable;
+      }
+
+      if (!isNaN(iterable.length)) {
+        var i = -1, next = function next() {
+          while (++i < iterable.length) {
+            if (hasOwn.call(iterable, i)) {
+              next.value = iterable[i];
+              next.done = false;
+              return next;
+            }
+          }
+
+          next.value = undefined;
+          next.done = true;
+
+          return next;
+        };
+
+        return next.next = next;
+      }
+    }
+
+    // Return an iterator with no values.
+    return { next: doneResult };
+  }
+  exports.values = values;
+
+  function doneResult() {
+    return { value: undefined, done: true };
+  }
+
+  Context.prototype = {
+    constructor: Context,
+
+    reset: function(skipTempReset) {
+      this.prev = 0;
+      this.next = 0;
+      // Resetting context._sent for legacy support of Babel's
+      // function.sent implementation.
+      this.sent = this._sent = undefined;
+      this.done = false;
+      this.delegate = null;
+
+      this.method = "next";
+      this.arg = undefined;
+
+      this.tryEntries.forEach(resetTryEntry);
+
+      if (!skipTempReset) {
+        for (var name in this) {
+          // Not sure about the optimal order of these conditions:
+          if (name.charAt(0) === "t" &&
+              hasOwn.call(this, name) &&
+              !isNaN(+name.slice(1))) {
+            this[name] = undefined;
+          }
+        }
+      }
+    },
+
+    stop: function() {
+      this.done = true;
+
+      var rootEntry = this.tryEntries[0];
+      var rootRecord = rootEntry.completion;
+      if (rootRecord.type === "throw") {
+        throw rootRecord.arg;
+      }
+
+      return this.rval;
+    },
+
+    dispatchException: function(exception) {
+      if (this.done) {
+        throw exception;
+      }
+
+      var context = this;
+      function handle(loc, caught) {
+        record.type = "throw";
+        record.arg = exception;
+        context.next = loc;
+
+        if (caught) {
+          // If the dispatched exception was caught by a catch block,
+          // then let that catch block handle the exception normally.
+          context.method = "next";
+          context.arg = undefined;
+        }
+
+        return !! caught;
+      }
+
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        var record = entry.completion;
+
+        if (entry.tryLoc === "root") {
+          // Exception thrown outside of any try block that could handle
+          // it, so set the completion value of the entire function to
+          // throw the exception.
+          return handle("end");
+        }
+
+        if (entry.tryLoc <= this.prev) {
+          var hasCatch = hasOwn.call(entry, "catchLoc");
+          var hasFinally = hasOwn.call(entry, "finallyLoc");
+
+          if (hasCatch && hasFinally) {
+            if (this.prev < entry.catchLoc) {
+              return handle(entry.catchLoc, true);
+            } else if (this.prev < entry.finallyLoc) {
+              return handle(entry.finallyLoc);
+            }
+
+          } else if (hasCatch) {
+            if (this.prev < entry.catchLoc) {
+              return handle(entry.catchLoc, true);
+            }
+
+          } else if (hasFinally) {
+            if (this.prev < entry.finallyLoc) {
+              return handle(entry.finallyLoc);
+            }
+
+          } else {
+            throw new Error("try statement without catch or finally");
+          }
+        }
+      }
+    },
+
+    abrupt: function(type, arg) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.tryLoc <= this.prev &&
+            hasOwn.call(entry, "finallyLoc") &&
+            this.prev < entry.finallyLoc) {
+          var finallyEntry = entry;
+          break;
+        }
+      }
+
+      if (finallyEntry &&
+          (type === "break" ||
+           type === "continue") &&
+          finallyEntry.tryLoc <= arg &&
+          arg <= finallyEntry.finallyLoc) {
+        // Ignore the finally entry if control is not jumping to a
+        // location outside the try/catch block.
+        finallyEntry = null;
+      }
+
+      var record = finallyEntry ? finallyEntry.completion : {};
+      record.type = type;
+      record.arg = arg;
+
+      if (finallyEntry) {
+        this.method = "next";
+        this.next = finallyEntry.finallyLoc;
+        return ContinueSentinel;
+      }
+
+      return this.complete(record);
+    },
+
+    complete: function(record, afterLoc) {
+      if (record.type === "throw") {
+        throw record.arg;
+      }
+
+      if (record.type === "break" ||
+          record.type === "continue") {
+        this.next = record.arg;
+      } else if (record.type === "return") {
+        this.rval = this.arg = record.arg;
+        this.method = "return";
+        this.next = "end";
+      } else if (record.type === "normal" && afterLoc) {
+        this.next = afterLoc;
+      }
+
+      return ContinueSentinel;
+    },
+
+    finish: function(finallyLoc) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.finallyLoc === finallyLoc) {
+          this.complete(entry.completion, entry.afterLoc);
+          resetTryEntry(entry);
+          return ContinueSentinel;
+        }
+      }
+    },
+
+    "catch": function(tryLoc) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.tryLoc === tryLoc) {
+          var record = entry.completion;
+          if (record.type === "throw") {
+            var thrown = record.arg;
+            resetTryEntry(entry);
+          }
+          return thrown;
+        }
+      }
+
+      // The context.catch method must only be called with a location
+      // argument that corresponds to a known catch block.
+      throw new Error("illegal catch attempt");
+    },
+
+    delegateYield: function(iterable, resultName, nextLoc) {
+      this.delegate = {
+        iterator: values(iterable),
+        resultName: resultName,
+        nextLoc: nextLoc
+      };
+
+      if (this.method === "next") {
+        // Deliberately forget the last sent value so that we don't
+        // accidentally pass it on to the delegate.
+        this.arg = undefined;
+      }
+
+      return ContinueSentinel;
+    }
+  };
+
+  // Regardless of whether this script is executing as a CommonJS module
+  // or not, return the runtime object so that we can declare the variable
+  // regeneratorRuntime in the outer scope, which allows this module to be
+  // injected easily by `bin/regenerator --include-runtime script.js`.
+  return exports;
+
+}(
+  // If this script is executing as a CommonJS module, use module.exports
+  // as the regeneratorRuntime namespace. Otherwise create a new empty
+  // object. Either way, the resulting object will be used to initialize
+  // the regeneratorRuntime variable at the top of this file.
+  typeof module === "object" ? module.exports : {}
+));
+
+try {
+  regeneratorRuntime = runtime;
+} catch (accidentalStrictMode) {
+  // This module should not be running in strict mode, so the above
+  // assignment should always work unless something is misconfigured. Just
+  // in case runtime.js accidentally runs in strict mode, we can escape
+  // strict mode using a global Function call. This could conceivably fail
+  // if a Content Security Policy forbids using Function, but in that case
+  // the proper solution is to fix the accidental strict mode problem. If
+  // you've misconfigured your bundler to force strict mode and applied a
+  // CSP to forbid Function, and you're not willing to fix either of those
+  // problems, please detail your unique predicament in a GitHub issue.
+  Function("r", "regeneratorRuntime = r")(runtime);
+}
+
+},{}],33:[function(require,module,exports){
 (function (global){
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -64166,12 +65347,16 @@ var __classPrivateFieldSet;
 });
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],30:[function(require,module,exports){
+},{}],34:[function(require,module,exports){
 "use strict";
 
 var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
+
+var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 
 var _jquery = _interopRequireDefault(require("jquery"));
 
@@ -64181,17 +65366,21 @@ var firebaseui = _interopRequireWildcard(require("firebaseui"));
 
 var _bootstrap = _interopRequireDefault(require("bootstrap"));
 
-/*global	tele:true,	firebase:	true, JitsiMeetExternalAPI:true*/
+var _notyf = require("notyf");
+
+/*global	tele:true,	firebase:	true, JitsiMeetExternalAPI:true, Intense: true*/
 window.tele = window.tele || {};
 window.user = window.user || null;
 
-//import	{}	from	'./calibrate';
 window.onload = function () {
   window.$ = _jquery["default"];
-  window.firebase = _firebase["default"]; //
+  window.firebase = _firebase["default"];
+  window.notyf = new _notyf.Notyf(); ///
+  //
 
   initFirebase();
   initSidemenu();
+  initModal(); //
 };
 /**
  * ------------------------------------------------
@@ -64244,8 +65433,7 @@ function initFirebaseUI() {
       }
     },
     signInFlow: 'popup',
-    signInOptions: [// Leave the lines as is for the providers you want to offer your users.
-    _firebase["default"].auth.GoogleAuthProvider.PROVIDER_ID, _firebase["default"].auth.EmailAuthProvider.PROVIDER_ID, _firebase["default"].auth.PhoneAuthProvider.PROVIDER_ID, firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID]
+    signInOptions: [_firebase["default"].auth.GoogleAuthProvider.PROVIDER_ID, _firebase["default"].auth.EmailAuthProvider.PROVIDER_ID]
   }; // Initialize the FirebaseUI Widget using Firebase.
 
   var ui = new firebaseui.auth.AuthUI(_firebase["default"].auth()); // The start method will wait until the DOM is loaded.
@@ -64261,14 +65449,10 @@ function initFirebaseUI() {
 
 function onFirebaseAuth() {
   if (window.user) {
-    console.log('User is logged in'); //	User	is	signed	in.
+    console.log('User is logged in'); //
 
-    (0, _jquery["default"])('#user_div').show();
-    (0, _jquery["default"])('#ham_button').show();
     (0, _jquery["default"])('#login_div').hide();
-    setTimeout(function () {
-      startVideo();
-    }, 2000);
+    verifyAccount();
   } else {
     //	No	user	is	signed	in.
     (0, _jquery["default"])('#user_div').hide();
@@ -64278,11 +65462,47 @@ function onFirebaseAuth() {
 
 
   window.loading_screen.finish();
-  if (document.getElementById('_status') != null) document.getElementById('_status').innerHTML = 'Loaded';
+  if (document.getElementById('_status') != null) document.getElementById('_status').innerHTML = 'Loaded'; //
+  //
+
+  function verifyAccount() {
+    var db = _firebase["default"].firestore();
+
+    var adminsRef = db.collection('admins').doc('authorized'); //
+
+    adminsRef.get().then(function (docSnapshot) {
+      if (docSnapshot.exists) {
+        adminsRef.onSnapshot(function (doc) {
+          //
+          var adminEmails = doc.get('emails');
+          if (window.user.displayName != null) (0, _jquery["default"])('#uname').text(' ' + window.user.displayName.split(' ')[0]);
+
+          if (adminEmails.indexOf(window.user.email) > -1) {
+            performAdminTasks();
+          } else {
+            console.log('Here');
+            (0, _jquery["default"])('#auth_message').html('We are sorry, you are not authorized to be here. Please contact <a href="mailto:telemd@gmail.com">telemd@gmail.com</a>');
+          } //	User	is	signed	in.
+
+
+          (0, _jquery["default"])('#user_div').show();
+          (0, _jquery["default"])('#ham_button').show();
+        }, function (serr) {
+          //...
+          dbError(serr);
+        });
+      } else {
+        dbError('Snapshot does not exist');
+      }
+    }, function (err) {
+      dbError(err);
+    });
+  }
 }
 /**
  * ------------------------------------------------
  * initSidemenu
+ *
  * // FIX ME: Make sure handling #main and #main-div is
  * // handled consistently across main.js, rmp.js and admin.js
  * ------------------------------------------------
@@ -64372,83 +65592,190 @@ function initSidemenu() {
 }
 /**
  * ------------------------------------------------
- * startVideo
+ * initModal
  * ------------------------------------------------
  */
 
 
-function startVideo() {
-  //
-  //
-  //
-  //
-  var user = _firebase["default"].auth().currentUser;
+function initModal() {
+  var modal = document.querySelector('.modal');
+  var closeButton = document.querySelector('.close-button');
 
-  if (user != null) {
-    var email_id = user.email; //
-
-    var body_height = (0, _jquery["default"])(window).height();
-    var header_height = (0, _jquery["default"])('header').outerHeight();
-    var header_width = (0, _jquery["default"])('header').outerWidth() - 60;
-    var prediv_height = (0, _jquery["default"])('#prelogin').outerHeight();
-    var meet_height = body_height - header_height - prediv_height - 25;
-    var meet_width = header_width; //
-
-    (0, _jquery["default"])('#main').css({
-      'maxWidth': meet_width
-    });
-    (0, _jquery["default"])('#main').width(meet_width); //
-
-    var doc_uid = ''; //
-
-    var parametes = getUrlVars();
-
-    if (parametes.doc != null) {
-      doc_uid = parametes.doc; //
-
-      var domain = 'meet.jit.si';
-      var options = {
-        roomName: 'COVID19-' + doc_uid,
-        width: meet_width,
-        height: meet_height,
-        parentNode: document.querySelector('#meet'),
-        interfaceConfigOverwrite: {
-          DEFAULT_BACKGROUND: '#111',
-          DEFAULT_REMOTE_DISPLAY_NAME: 'Patient',
-          SHOW_BRAND_WATERMARK: true,
-          BRAND_WATERMARK_LINK: 'https://telemd.org.in/img/logo.png',
-          SHOW_JITSI_WATERMARK: false,
-          SHOW_WATERMARK_FOR_GUESTS: false,
-          MOBILE_APP_PROMO: false,
-          SHOW_CHROME_EXTENSION_BANNER: false,
-          TOOLBAR_BUTTONS: ['microphone', 'camera', 'desktop', 'fullscreen', 'fodeviceselection', 'hangup', 'profile', 'recording', 'livestreaming', 'etherpad', 'chat', 'sharedvideo', 'settings', 'videoquality', 'filmstrip', 'stats', 'shortcuts', 'tileview', 'help', 'mute-everyone']
-        }
-      };
-      var api = new JitsiMeetExternalAPI(domain, options);
-      api.executeCommand('displayName', window.user.displayName);
-    } else (0, _jquery["default"])('#meet').text('Error!! No Doctor specified...');
+  function toggleModal() {
+    modal.classList.toggle('show-modal');
   }
+
+  function windowOnClick(event) {
+    if (event.target === modal) {
+      toggleModal();
+    }
+  } //
+
+
+  closeButton.addEventListener('click', toggleModal);
+  window.addEventListener('click', windowOnClick); //
+
+  var intense_elements = document.querySelectorAll('.intense');
+  Intense(intense_elements);
 }
 /**
  * ------------------------------------------------
- * getUrlVars
+ * performAdminTasks
  * ------------------------------------------------
  */
-// Read a page's GET URL variables and return them as an associative array.
 
 
-function getUrlVars() {
-  var vars = [],
-      hash;
-  var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+function performAdminTasks() {
+  console.log('Get list of doctors, arrange by authorized vs not autorized.'); //
 
-  for (var i = 0; i < hashes.length; i++) {
-    hash = hashes[i].split('=');
-    vars.push(hash[0]);
-    vars[hash[0]] = hash[1];
+  getDocuments('doctors').then(function (value) {
+    (0, _jquery["default"])('#review_doctors').show();
+    value.forEach(function (element, index) {
+      index += 1;
+      var markup = '<tr><td>' + index + '</td><td>' + element.name + '</td><td id="status_' + index + '">' + element.status + '</td><td>' + window.user.uid + '</td><td><a href="#" id="doc_' + index + '">View</a></td></tr>';
+      (0, _jquery["default"])('table tbody').append(markup);
+      (0, _jquery["default"])('#doc_' + index).click(function () {
+        console.log('Show details for index: ' + index + ', name: ' + element.name); //
+
+        var modal = document.querySelector('.modal');
+        modal.classList.toggle('show-modal'); //
+        // Show approve button
+
+        var approve_markup = '<button	id="approve_button_' + index + '" class="bigbutton" style="background-color: green; display:none;">✔ Approve</button> &nbsp';
+        var reject_markup = '<button	id="reject_button_' + index + '" class="bigbutton" style="background-color: red; display:none;">✘ Reject</button>';
+        (0, _jquery["default"])('#action_buttons').append(approve_markup);
+        (0, _jquery["default"])('#action_buttons').append(reject_markup); // Show rejected button
+        //
+
+        (0, _jquery["default"])('#doc_name').text(element.name);
+        (0, _jquery["default"])('#doc_age').text(element.age);
+        (0, _jquery["default"])('#doc_ph').text(element.phnumber); //
+
+        (0, _jquery["default"])('#doc_address').text(element.address);
+        (0, _jquery["default"])('#doc_city').text(element.city);
+        (0, _jquery["default"])('#doc_country').text(element.state + ',' + element.country); // show buttons
+
+        (0, _jquery["default"])('#approve_button_' + index).show();
+        (0, _jquery["default"])('#reject_button_' + index).show(); // Handle on click
+
+        if (!element.verified) {
+          // Approved clicked
+          (0, _jquery["default"])('#approve_button_' + index).click(function () {
+            console.log('Approved for: ' + element.name);
+
+            var db = _firebase["default"].firestore();
+
+            var usersRef = db.collection('doctors').doc(element.uid);
+            usersRef.update({
+              verified: true,
+              status: 'Approved'
+            }).then(function () {
+              console.log('Document successfully written!');
+              window.notyf.success('Approved!');
+              (0, _jquery["default"])('#status_' + index).text('Approved');
+            })["catch"](function (error) {
+              console.error('Error writing document: ', error);
+              throwError('Error writing document:\n' + toString(error));
+            }); //
+          }); // Reject clicked
+
+          (0, _jquery["default"])('#reject_button_' + index).click(function () {
+            console.log('Rejected for: ' + element.name);
+
+            var db = _firebase["default"].firestore();
+
+            var usersRef = db.collection('doctors').doc(element.uid);
+            usersRef.update({
+              verified: true,
+              status: 'Rejected'
+            }).then(function () {
+              console.log('Document successfully written!');
+              window.notyf.error('Rejected!');
+              (0, _jquery["default"])('#status_' + index).text('Rejected');
+            })["catch"](function (error) {
+              console.error('Error writing document: ', error);
+              throwError('Error writing document:\n' + toString(error));
+            });
+          });
+        } else {
+          (0, _jquery["default"])('#approve_button_' + index).attr('disabled', true);
+          (0, _jquery["default"])('#reject_button_' + index).attr('disabled', true);
+          (0, _jquery["default"])('#approve_button_' + index).removeClass('bigbutton');
+          (0, _jquery["default"])('#reject_button_' + index).removeClass('bigbutton');
+          (0, _jquery["default"])('#approve_button_' + index).attr('style', 'background-color: #666');
+          (0, _jquery["default"])('#reject_button_' + index).attr('style', 'background-color: #666');
+        } // hide others
+
+
+        value.forEach(function (ele, id) {
+          id += 1;
+
+          if (index != id) {
+            (0, _jquery["default"])('#approve_button_' + id).hide();
+            (0, _jquery["default"])('#reject_button_' + id).hide();
+          }
+        });
+      });
+    });
+  }, function (err) {
+    // ...
+    dbError(err);
+  });
+
+  function throwError(_in) {
+    (0, _jquery["default"])('#errorSpace').show();
+    (0, _jquery["default"])('#message').show();
+    (0, _jquery["default"])('#message').text(_in); //
+
+    window.notyf.error(_in);
   }
-
-  return vars;
 }
 
-},{"@babel/runtime/helpers/interopRequireDefault":1,"@babel/runtime/helpers/interopRequireWildcard":2,"bootstrap":19,"firebase":23,"firebaseui":24,"jquery":26}]},{},[30]);
+function getDocuments(_x) {
+  return _getDocuments.apply(this, arguments);
+} //
+//
+
+
+function _getDocuments() {
+  _getDocuments = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(_doc) {
+    var db, snapshot;
+    return _regenerator["default"].wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            db = _firebase["default"].firestore();
+            _context.next = 3;
+            return _firebase["default"].firestore().collection(_doc).get();
+
+          case 3:
+            snapshot = _context.sent;
+            return _context.abrupt("return", snapshot.docs.map(function (doc) {
+              return doc.data();
+            }));
+
+          case 5:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+  return _getDocuments.apply(this, arguments);
+}
+
+function dbError(_err) {
+  console.log(_err); // error loading database
+
+  console.log('Databse error...');
+  window.notyf.error('Error loading database. Try loggin in again...');
+  setTimeout(function () {
+    window.user = null;
+
+    _firebase["default"].auth().signOut();
+
+    location.reload(true);
+  }, 4000);
+}
+
+},{"@babel/runtime/helpers/asyncToGenerator":1,"@babel/runtime/helpers/interopRequireDefault":2,"@babel/runtime/helpers/interopRequireWildcard":3,"@babel/runtime/regenerator":5,"bootstrap":21,"firebase":25,"firebaseui":26,"jquery":28,"notyf":29}]},{},[34]);

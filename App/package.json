@@ -11,6 +11,7 @@
   "dependencies": {
     "@babel/core": "^7.9.0",
     "@babel/preset-env": "^7.9.0",
+    "@babel/runtime": "^7.9.2",
     "babelify": "^10.0.0",
     "bootstrap": "^4.4.1",
     "browser-sync": "^2.26.7",
@@ -28,6 +29,7 @@
     "gulp-shell": "^0.8.0",
     "gulp-uglify": "^3.0.2",
     "gulp-version-number": "^0.2.4",
+    "intense-images": "^1.0.0",
     "jquery": "^3.4.1",
     "notyf": "^3.4.0",
     "please-wait": "0.0.5",
@@ -36,5 +38,7 @@
     "vinyl-buffer": "^1.0.1",
     "vinyl-source-stream": "^2.0.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.9.0"
+  }
 }

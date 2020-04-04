@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>TeleMD:DemoApp</title>
+		<title>TeleMD:WebApp</title>
 
 		<!--	Meta	-->
 		<meta	content="content-type"	content="text/html;	charset=utf-8"/>
@@ -25,13 +25,11 @@
 		<link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.4.0/firebase-ui-auth.css?v=1.0.0" />
 
 		<!--	scripts	-->
-		<script	type="text/javascript"	src="third_party/please-wait.min.js"></script>
+		<script	type="text/javascript" src="third_party/please-wait.min.js"></script>
+		<script src='https://meet.jit.si/external_api.js?v=1.0.0'></script>
 		<!--	The	core	Firebase	JS	SDK	-->
 		<script	src="https://www.gstatic.com/firebasejs/7.13.0/firebase-app.js"></script>
 		<script	src="https://www.gstatic.com/firebasejs/7.13.0/firebase-analytics.js"></script>
-		<!--	The	Jit si SDK	-->
-		<script src='https://meet.jit.si/external_api.js?v=1.0.0'></script>
-
 	</head>
 
 	<body>
@@ -76,7 +74,7 @@
 	        <a href="#" id="about_item"><span>About</span></a>
 	        <a href="#" id="settings_item"><span>Settings</span></a>
 	        <a href="#" id="contact_item"><span>Contact</span></a>
-	        <a href="index.html" id="logout_button"><span>Logout</span></a>
+	        <a href="http://telemd.org.in" id="logout_button"><span>Logout</span></a>
 	      </div>
 	    </div>
 		</header>
@@ -89,7 +87,7 @@
 		<!--	MAIN	-->
 		<div	id="main">
 				<div	id="user_div"	class="loggedin-div"	style="display:	none;">
-						<div	class="main_video_item"	id="meet">Meeting screen...</div>
+						<div	class="main_video_item"	id="meet"></div>
 				</div>
 		</div>
 
@@ -106,7 +104,7 @@
 
 		<!--	FOOTER	-->
 		<footer	id="_footer">
-		<p>Made	by	Timeblur®</p>
+		<!--p>Made	by	Timeblur®</p-->
 		</footer>
 
 

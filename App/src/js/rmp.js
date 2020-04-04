@@ -17,6 +17,8 @@ window.onload	=	function()	{
 	//
 	initFirebase();
 	initSidemenu();
+	//
+	//
 	$('#formsubmit').click(submitDoctorDetails);
 };
 
@@ -31,6 +33,7 @@ function	initFirebase(){
 
 	//	Your	web	app's	Firebase	configuration
 	const	firebaseConfig	=	{};
+
 	//	Initialize	Firebase
 	firebase.initializeApp(firebaseConfig);
 
@@ -101,21 +104,57 @@ function	onFirebaseAuth(){
 		usersRef.get().then(function(docSnapshot){
 			if (docSnapshot.exists) {
 				usersRef.onSnapshot(function(doc){
-					// Submitted user, might be in review or approved [to be checked]
-					userState = 'pending';
-					console.log('Pending stage');
-					$('#user_div').hide();
-					$('#inlogin').hide();
-					$('#pending_div').show();
-					$('#ham_button').show();
-					$('#login_div').hide();
-					//
-					setTimeout(function(){waitTimer(0,10);}, 3000);
-
 					// Check if the user is verified and if verified create chatroom
-					//console.log(doc);
-					// Verfied user
-					//console.log('User is verified and onboarded.');
+					let db_Status = doc.get('status').toString();
+					if(doc.get('verified')){
+						if(db_Status === 'Approved'){
+							// Definitely approved
+							// or approved [to be checked]
+							// Verfied user
+							console.log('User is verified and onboarded.');
+							userState = 'approved';
+							$('#user_div').hide();
+							$('pending_div').show();
+							$('#inlogin').hide();
+							$('#verified_div').show();
+							$('#ham_button').show();
+							$('#login_div').hide();
+							$('#disc').hide();
+							//
+							getUserInfo().then(function(value){
+								window.user.info = value;
+								startVideo();
+							});
+							//
+
+							//
+						}else if(db_Status === 'Rejected'){
+							// Definitely rejected
+							$('#main_applicant_status').text('🛑 APPLICATION REJECTED');
+							$('.rejected_stage').show();
+							// Rejected user
+							userState = 'rejected';
+							console.log('User is rejected.');
+							$('#user_div').hide();
+							$('#inlogin').hide();
+							$('#pending_div').show();
+							$('#ham_button').show();
+							$('#login_div').hide();
+						}else{
+							console.log('error! Not supposed to be here');
+						}
+					}else{
+						// Submitted user, still pending review
+						userState = 'pending';
+						console.log('Pending stage');
+						$('#user_div').hide();
+						$('#inlogin').hide();
+						$('#pending_div').show();
+						$('#ham_button').show();
+						$('#login_div').hide();
+						//
+						setTimeout(function(){waitTimer(0,10);}, 3000);
+					}
 				},function(serr){
 					//...
 					console.log('error!');
@@ -161,6 +200,8 @@ function	onFirebaseAuth(){
 /**
  * ------------------------------------------------
  * initSidemenu
+ * // FIX ME: Make sure handling #main and #main-div is
+ * // handled consistently across main.js, rmp.js and admin.js
  * ------------------------------------------------
  */
 function initSidemenu(){
@@ -263,7 +304,6 @@ function submitDoctorDetails(){
 		return -1;
 	}
 
-
 	console.log('Now submit values and documents');
 	//
 	var db = firebase.firestore();
@@ -285,7 +325,9 @@ function submitDoctorDetails(){
 		state: state,
 		country: 'IN',
 		phnumber: phnumber,
-		verified: false
+		uid: window.user.uid,
+		verified: false,
+		status: 'Pending...'
 	}).then(function() {
 		console.log('Document successfully written!');
 		//
@@ -301,7 +343,6 @@ function submitDoctorDetails(){
 		throwError('Error writing document:\n'+ toString(error));
 	});
 
-
 	function throwError(_in){
 		$('#noteSpace').hide();
 		$('#errorSpace').show();
@@ -310,7 +351,6 @@ function submitDoctorDetails(){
 		//
 		window.notyf.error(_in);
 	}
-
 
 	function validateForm() {
 		var isValid = true;
@@ -325,7 +365,6 @@ function submitDoctorDetails(){
 		});
 		return isValid;
 	}
-
 }
 
 
@@ -377,7 +416,10 @@ function waitTimer(mm,ss){
 				$('.retry_stage_b').hide();
 				$('.retry_stage_c').hide();
 				//
+				//
 				clearInterval(timeinterval);
+				//
+				setTimeout(function(){location.reload(true);}, 2000);
 			}
 		}
 
@@ -390,139 +432,59 @@ function waitTimer(mm,ss){
 }
 
 
-/*
-function mostlyThese(){
+async function getUserInfo() {
+	var db = firebase.firestore();
+	const snapshot = await db.collection('doctors').doc(window.user.uid).get();
+	return snapshot.data();
+}
 
-
-
-	$('#formsubmit').click(function(){
-		//$('#formmain').attr('action', 'https://us-central1-digidoc-17b1a.cloudfunctions.net/newdoc');
-		//console.log($('#formmain').attr('action'));
-		$('#formmain').ajaxForm({
-			url : 'https://us-central1-digidoc-17b1a.cloudfunctions.net/newdoc', // or whatever
-			crossDomain: true,
-			dataType : 'json',
-			success : function (response) {
-				//console.log(response);
-				$('#noteSpace').show();
-				$('#errorSpace').hide();
-				$('#message').text('');
-				if( response.code == 'COMPLETED'){
-					$('#errorSpace').hide();
-					$.toast('Completed');
-					//console.log('Show completed toast!');
-					updateUser();
-				}else if(response.code == 'auth/email-already-exists'){
-					updateUser(response.message);
-				}else{
-					//
-					$('#noteSpace').hide();
-					$('#errorSpace').show();
-					if(response.code.includes('auth/')){
-						let message_in = response.message;
-						message_in = message_in.replace('email address', 'number');
-						message_in = message_in.replace('email', 'number');
-						$('#message').text(message_in);
-					}else
-						$('#message').text(response.message);
-				}
-			}
-		});
-	});
-
-
-	function updateUser(message_in){
+/**
+ * ------------------------------------------------
+ * startVideo
+ * ------------------------------------------------
+ */
+function startVideo(){
+	//
+	let	user	=	firebase.auth().currentUser;
+	if(user	!=	null){
+		var	email_id	=	user.email;
+		//var meeting_width = document.getElementById('main_video_item').offsetWidth;
+		let body_height = $( window ).height();
+		let header_height = $('header').outerHeight();
+		let header_width = $('header').outerWidth() - 60;
+		let prediv_height = $('#prelogin').outerHeight();
+		let meet_height = body_height - header_height - prediv_height - 25;
+		let meet_width = header_width;
 		//
-		// Verify Doctor details
-		var phone_num = $('#phonefield').val();
-		var ref_code = $('#codefield').val();
-		var doc_id = '';
-		//console.log(phone_num + ' ' + ref_code);
-
-		// Get Doctor ID
-		if(ref_code != '' && phone_num != ''){
-			if(ref_code.length == 6 && phone_num.length == 10){
-				$('#noteSpace').hide();
-				var docRef = db.collection('referralCodes').doc(ref_code);
-				docRef.get().then(function(doc) {
-					if (doc.exists) {
-						//console.log('Document data:', doc.data());
-						doc_id = doc.data().docid;
-						//
-						// Check any image being updated
-						var eduFile = $('#edufile').prop('files');
-						var regFile = $('#regfile').prop('files');
-						if(eduFile.length != 0 && regFile.length != 0){
-							// if present - Ask confirmation & upload
-							if (confirm('Number exists. \nAre you sure you want to upload these into the database?')) {
-								//
-								uploadFileFB(eduFile[0], doc_id, 'Edu');
-								uploadFileFB(regFile[0], doc_id, 'Cert');
-							} else {
-								// Do nothing!
-								message_in = 'Upload cancelled by user.';
-								throwError(message_in);
-							}
-						}else{
-							message_in += ' No files selected to upload.';
-							throwError(message_in);
-						}
-					} else {
-						// doc.data() will be undefined in this case
-						//console.log('No such document!');
-						message_in = 'No such document found!';
-						throwError(message_in);
-					}
-				}).catch(function(error) {
-					//console.log('Error getting document:', error);
-					message_in = 'Server error --' +	error;
-					throwError(message_in);
-				});
-			}else{
-				message_in = 'phone-number/refferal-code incorrect. Check again!';
-				throwError(message_in);
-			}
-		}else{
-			message_in = 'phone-number/refferal-code cannot be empty!';
-			throwError(message_in);
-		}
-	}
-
-
-
-	function uploadFileFB(f, uid, type){
+		$('#main').css({'maxWidth': meet_width});
+		$('#main').width(meet_width);
 		//
-		var uploadTask = storageRef.child('/doc_uploads/'+uid+'/'+type).put(f);
-
-		// Register three observers:
-		// 1. 'state_changed' observer, called any time the state changes
-		// 2. Error observer, called on failure
-		// 3. Completion observer, called on successful completion
-		uploadTask.on('state_changed', function(snapshot){
-			// Observe state change events such as progress, pause, and resume
-			// Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-			var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-			//console.log('Upload is ' + progress + '% done');
-			switch (snapshot.state) {
-			case firebase.storage.TaskState.PAUSED: // or 'paused'
-				break;
-			case firebase.storage.TaskState.RUNNING: // or 'running'
-				break;
+		const domain = 'meet.jit.si';
+		const options = {
+			roomName: 'COVID19-'+window.user.uid,
+			width: meet_width,
+			height: meet_height,
+			parentNode: document.querySelector('#meet'),
+			interfaceConfigOverwrite: {
+				DEFAULT_BACKGROUND: '#111',
+				DEFAULT_REMOTE_DISPLAY_NAME: 'Doctor',
+				SHOW_BRAND_WATERMARK: true,
+				BRAND_WATERMARK_LINK: 'https://telemd.org.in/img/logo.png',
+				SHOW_JITSI_WATERMARK: false,
+				SHOW_WATERMARK_FOR_GUESTS: false,
+				MOBILE_APP_PROMO: false,
+				SHOW_CHROME_EXTENSION_BANNER: false,
+				TOOLBAR_BUTTONS: [
+					'microphone', 'camera', 'desktop', 'fullscreen',
+					'fodeviceselection', 'hangup', 'profile', 'recording',
+					'livestreaming', 'etherpad', 'chat','sharedvideo', 'settings',
+					'videoquality', 'filmstrip', 'stats', 'shortcuts',
+					'tileview', 'help', 'mute-everyone'
+				]
 			}
-		}, function(error) {
-			// Handle unsuccessful uploads
-			//console.log(error);
-			let message_ = error.message_;
-			throwError(message_);
-		}, function() {
-			// Handle successful uploads on complete
-			// For instance, get the download URL: https://firebasestorage.googleapis.com/...
-			uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
-				//console.log('File available at', downloadURL);
-				$.toast('Upload completd for - ' + type);
-			});
-		});
-
+		};
+		const api = new JitsiMeetExternalAPI(domain, options);
+		api.executeCommand('displayName', window.user.info.name);
+		api.executeCommand('subject', 'COVID19-'+window.user.info.name);
 	}
 }
-*/

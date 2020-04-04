@@ -26,6 +26,7 @@
 
 		<!--	scripts	-->
 		<script	type="text/javascript"	src="third_party/please-wait.min.js"></script>
+		<script src='https://meet.jit.si/external_api.js?v=1.0.0'></script>
 		<!--	The	core	Firebase	JS	SDK	-->
 		<script	src="https://www.gstatic.com/firebasejs/7.13.0/firebase-app.js"></script>
 		<script	src="https://www.gstatic.com/firebasejs/7.13.0/firebase-analytics.js"></script>
@@ -71,11 +72,11 @@
 			<div id="sidenav" class="sidenav closed">
 	      <a href="javascript:void(0)" class="closebtn" id="close_nav">&times;</a>
 	      <div id="sidemenu">
-	        <a href="index.html" id="home_item"><span class="selected">Home</span></a>
+	        <a href="rmp.html" id="home_item"><span class="selected">Home</span></a>
 	        <a href="#" id="about_item"><span>About</span></a>
 	        <a href="#" id="settings_item"><span>Settings</span></a>
 	        <a href="#" id="contact_item"><span>Contact</span></a>
-	        <a href="rmp.html" id="logout_button"><span>Logout</span></a>
+	        <a href="http://telemd.org.in" id="logout_button"><span>Logout</span></a>
 	      </div>
 	    </div>
 		</header>
@@ -188,7 +189,7 @@
 		  </div>
 
 			<div id="pending_div" style="display: none;">
-				<h4 style="color: #bbb;text-align: center;margin-bottom: 5px;">⚠️ REVIEW PENDING</h5>
+				<h4 style="color: #bbb;text-align: center;margin-bottom: 5px;" id="main_applicant_status">⚠️ REVIEW PENDING</h5>
 				<div id="clockdiv">
 				  <div class="retry_stage_a" style="display: none;">
 				  	<span>Retrying...</span>
@@ -205,6 +206,9 @@
 				  	<span class="seconds"></span>
 				  	<span>seconds...</span>
 				  </div>
+				  <div class="rejected_stage" style="display: none;">
+				  	<span>Sorry, your application has been rejected. Please contact our  <a href="mailto:telemd@gmail.com">team</a>, we will get back to you soon. </span>
+				  </div>
 				</div>
 
 
@@ -212,7 +216,7 @@
 					<h5>NOTE</h5>
 		    	<hr style="color: #fff;background: #fff;">
 					<ul>
-						<li>Your application is being reviewed, It can take few seconds to several minutes.</li>
+						<li>When your application is being reviewed, It can take few seconds to several minutes.</li>
 						<li>You need to be a Registed Medical Practitioner(RMP) to provide services on this website.</li>
 						<li>Once approved, you'll revice a confirmation and you can <a href="rmp.html" target="_blank">login here</a> to provide services.</li>
 						<li>After loging in your <b>virtual hospital room</b> will be ready to treat COVID19 patients online.</li>
@@ -225,8 +229,8 @@
 			</div>
 
 			<div id="verified_div" style="display: none;">
+				<div	class="main_video_item"	id="meet"></div>
 			</div>
-
 		</div>
 
 		<!--	ABOUT	-->
@@ -242,7 +246,7 @@
 		<!--	FOOTER	-->
 		<footer	id="_footer">
 		<!--p>Made	by	Timeblur®</p-->
-		<p>DISCLAIMER: TeleMD is a technology platform to connect individuals(COVID19 patients) with participating physicians and other Registered Medical Proffesionals and licensed health care practitioners (“Providers”), for the purpose of engaging in a health care consultation. TeleMD does not provide medical care and does not interfere with the practice of medicine by licensed Providers. Participating Providers are solely responsible for their services and compliance with the latest guidelines from Ministy Of Health (MOH) Government of India on Telemedicice for COVID19. <br>Read more: <a href="https://www.mohfw.gov.in/pdf/Telemedicine.pdf" target="_blank">https://www.mohfw.gov.in/pdf/Telemedicine.pdf</a></p>
+		<p id="disc">DISCLAIMER: TeleMD is a technology platform to connect individuals(COVID19 patients) with participating physicians and other Registered Medical Proffesionals and licensed health care practitioners (“Providers”), for the purpose of engaging in a health care consultation. TeleMD does not provide medical care and does not interfere with the practice of medicine by licensed Providers. Participating Providers are solely responsible for their services and compliance with the latest guidelines from Ministy Of Health (MOH) Government of India on Telemedicice for COVID19. <br>Read more: <a href="https://www.mohfw.gov.in/pdf/Telemedicine.pdf" target="_blank">https://www.mohfw.gov.in/pdf/Telemedicine.pdf</a></p>
 		</footer>
 	</body>
 </html>

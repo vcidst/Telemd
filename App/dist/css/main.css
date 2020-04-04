@@ -159,8 +159,10 @@ footer {
     font-size: 18px; } }
 
 #main {
+  text-align: center;
   transition: transform .5s;
   padding: 0;
+  max-width: 740px;
   margin: 0 auto; }
 
 #header_content {
